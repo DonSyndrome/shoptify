@@ -154,6 +154,8 @@ class SearchFilter extends React.Component {
             value: item.type,
             label: item.type
           }));
+        default:
+          return null;
       }
     })();
 

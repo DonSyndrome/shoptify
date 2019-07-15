@@ -143,6 +143,7 @@ class SearchFilter extends React.Component {
 
     // conditionally set the value of 'suggestions' with an IIFE
     const suggestions = (() => {
+      // eslint-disable-next-line default-case
       switch (columnToQuery) {
         case "date":
           return this.props.totalItemsFormatted.map(item => ({
@@ -154,7 +155,7 @@ class SearchFilter extends React.Component {
             value: item.employee_name,
             label: item.employee_name
           }));
-        case "date":
+        case "work_description":
           return this.props.totalItemsFormatted.map(item => ({
             value: item.work_description,
             label: item.work_description

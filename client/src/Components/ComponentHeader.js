@@ -19,7 +19,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import SvgIcon from '@material-ui/core/SvgIcon';
-import red from '@material-ui/core/colors/red';
 
 const drawerWidth = 240;
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, BrowserRouter, Switch, Router, Link } from "react-router-dom";
+import { Route, BrowserRouter, Switch } from "react-router-dom";
 import EmployeeList from "./Components/Employee/EmployeeList";
 import DepartmentList from "./Components/Department/DepartmentList";
 import NotFound from "./Components/NotFound";
@@ -11,7 +11,7 @@ class Routes extends Component {
         <BrowserRouter basename="/employee">
           <div>
             <Switch>
-              <Route exact exact path={"/employee"} component={EmployeeList} />
+              <Route exact path={"/employee"} component={EmployeeList} />
               <Route
                 exact
                 path="/department"

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Welcome from "react-welcome-page";
 
 // A functional component only for the landing page

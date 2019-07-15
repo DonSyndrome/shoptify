@@ -10,6 +10,7 @@ export default class NotFound extends Component {
           <div className="custom-navbar">
             <div className="brand-logo">
               <img
+                alt='placeholder'
                 src={require("../assets/images/logo.png")}
                 style={{ width: "80px" }}
               />
@@ -26,6 +27,7 @@ export default class NotFound extends Component {
           </div>
           <div className="central-body">
             <img
+              alt='placeholder'
               className="image-404"
               src={require("../assets/images/404.svg")}
               width="300px"
@@ -36,17 +38,20 @@ export default class NotFound extends Component {
           </div>
           <div className="objects">
             <img
+              alt='placeholder'
               className="object_rocket"
               src={require("../assets/images/rocket.svg")}
               width="40px"
             />
             <div className="earth-moon">
               <img
+                alt='placeholder'
                 className="object_earth"
                 src={require("../assets/images/earth.svg")}
                 width="100px"
               />
               <img
+                alt='placeholder'
                 className="object_moon"
                 src={require("../assets/images/moon.svg")}
                 width="80px"
@@ -54,6 +59,7 @@ export default class NotFound extends Component {
             </div>
             <div className="box_astronaut">
               <img
+                alt='placeholder'
                 className="object_astronaut"
                 src={require("../assets/images/astronaut.svg")}
                 width="140px"

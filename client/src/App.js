@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import { Route, BrowserRouter, Switch, Router, Link } from "react-router-dom";
-// import Routes from "./Routes";
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
+import { Route, BrowserRouter, Switch, Router } from "react-router-dom";
 import history from "./history";
 import axios from "axios";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFilter,
   faDownload,
@@ -19,11 +16,6 @@ import LandingPage from "./Components/LandingPage";
 
 library.add(faFilter, faDownload, faCalendarAlt);
 
-const theme = createMuiTheme({
-  typography: {
-    useNextVariants: true
-  }
-});
 
 class App extends Component {
   state = {

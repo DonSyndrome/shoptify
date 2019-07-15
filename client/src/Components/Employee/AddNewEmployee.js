@@ -23,8 +23,8 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import FormControl from "@material-ui/core/FormControl";
 import { MenuItem } from "material-ui/Menu";
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
+// const ITEM_HEIGHT = 48;
+// const ITEM_PADDING_TOP = 8;
 
 function getStyles(name, that) {
   return {

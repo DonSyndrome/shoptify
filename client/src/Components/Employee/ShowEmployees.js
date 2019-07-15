@@ -100,6 +100,7 @@ class ShowEmployee extends Component {
                   }}
                   type="string"
                   fullWidth
+                  // eslint-disable-next-line react/jsx-no-duplicate-props
                   InputProps={{
                     classes: {
                       underline: classes.underline
