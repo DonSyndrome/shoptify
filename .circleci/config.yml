@@ -37,9 +37,7 @@ jobs:
       - run: yarn test
 
       # install client dep!
-      - run: cd client && yarn
-      # build the app!
-      - run: yarn build 
+      - run: cd client && yarn && yarn build 
       # go back to the roots!
       - run: cd ../
 
