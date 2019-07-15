@@ -11,7 +11,7 @@
         "start": "node index.js ",
         "server": "nodemon index.js",
         "next": "next",
-        "next-build": "next build",
+        "build": "next build",
         "dev": "concurrently \"npm run server\" \"npm run next\"",
         "test": "echo no test ",
         "fix-code": "prettier-eslint --write 'src/**/*.{js,jsx}' ",

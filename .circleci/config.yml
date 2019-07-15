@@ -38,11 +38,9 @@ jobs:
       # make shure the mongodb is present! and store it at .env file so it culd transfer into the app engine container
       - run: echo MONGO_DB=$MONGO_DB > .env
 
-      # # install client dep!
-      # - run: cd client && yarn && yarn build 
-      # # go back to the roots!
-      # - run: cd ../
-
+      # build next server!
+      - run:  yarn build 
+      
       # install the gcloud sdk:
       # Add the Cloud SDK distribution URI as a package source
       - run: echo "deb http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
