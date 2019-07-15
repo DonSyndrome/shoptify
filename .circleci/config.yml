@@ -36,7 +36,7 @@ jobs:
       # run tests!
       - run: yarn test
       # make shure the mongodb is present!
-      - run: yarn test
+      - run: echo $MONGO_DB
 
       # install client dep!
       - run: cd client && yarn && yarn build 
