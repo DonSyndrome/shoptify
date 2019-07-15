@@ -35,8 +35,8 @@ jobs:
 
       # run tests!
       - run: yarn test
-      # make shure the mongodb is present!
-      - run: echo $MONGO_DB
+      # make shure the mongodb is present! and store it at .env file so it culd transfer into the app engine container
+      - run: echo MONGO_DB=$MONGO_DB > .evn
 
       # install client dep!
       - run: cd client && yarn && yarn build 
