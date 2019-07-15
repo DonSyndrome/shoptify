@@ -121,3 +121,9 @@ You are getting "Error R14 (Memory quota exceeded)". [Check R14 - Memory Quota E
 **2-nd Issue** - If I put the below in package.json while running the app locally, the app is not rendering anything
 "homepage": "https://mui-table-3.appspot.com/employee"
 
+resurces that ive used:
+deploying app to google cloud platforms->
+https://medium.com/@paulrohan/deploying-a-react-node-mongodb-app-to-google-cloud-platforms-google-app-engine-1ba680447d59
+
+connect mongoProd to robo3t ->
+https://stackoverflow.com/questions/43694799/how-can-i-connect-to-mongodb-atlas-using-robomongo

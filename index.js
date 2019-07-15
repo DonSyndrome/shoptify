@@ -11,6 +11,7 @@ const addRequestId = require("express-request-id")();
 
 const departmentRoutes = require("./routes/departmentRoutes");
 const employeeRoutes = require("./routes/employeeRoutes");
+const playlistRoutes = require("./routes/playlistRoutes");
 
 const next = require('next')
 var dev = process.env.NODE_ENV !== "production"
@@ -91,10 +92,8 @@ nextApp.prepare().then(() => {
 
   app.use("/api/department", departmentRoutes);
   app.use("/api/employee", employeeRoutes);
+  app.use("/api/playlist", playlistRoutes);
 
-  app.get('/cms|/cms/**', (req, res) => {
-    res.sendFile(path.join(__dirname, "/client/build/index.html"));
-  });
 
 
   // Only now, AFTER the above /api/ routes, the "catchall" handler routes: for any request that doesn't match any route after "/" below and send back React's index.html file.

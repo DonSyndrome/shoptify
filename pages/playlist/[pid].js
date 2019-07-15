@@ -1,33 +1,41 @@
 import React from 'react';
+import mongoose from 'mongoose';
+var Playlist = mongoose.model('Playlist');
 
 // var admin = require("firebase-admin");
 // // Fetch the service account key JSON file contents
 // var serviceAccount = require("../../firebase-key.json");
 
 
-const index =  ({ pid }) => (
+const index =  ({ pid,data }) => (
   <ul>
   <h1>
     playlist number:{ pid }
   </h1>
+  <p>
+    {JSON.stringify(data)}
+  </p>
   </ul>
 )
 index.getInitialProps = async ({ query }) => {
-  // // Initialize the app with a service account, granting admin privileges
-  // admin.initializeApp({
-  //   credential: admin.credential.cert(serviceAccount),
-  //   databaseURL: "https://spotify-shmerkey.firebaseio.com"
-  // });
-
-  // // As an admin, the app has access to read and write all data, regardless of Security Rules
-  // var db = await admin.database();
-  // var ref = db.ref("playlist");
-  // ref.once("value", function(snapshot) {
-  //   console.log(snapshot.val());
-  // });
-
   const { pid } = query
-    return { pid };
+  const data = await Playlist.findOne(
+    {
+      "playlist_slug":pid,
+    },
+    null,
+    {},
+    (err, docs) => {
+      if (err) {
+        console.log(err)
+        return {};
+      } else {
+        return docs;
+      }
+    }
+  );
+
+    return { pid,data };
 }
 
   export default index
