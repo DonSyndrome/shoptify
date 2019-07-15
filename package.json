@@ -8,11 +8,9 @@
     "homepage": "https://mui-table-3.appspot.com/employee",
     "main": "index.js",
     "scripts": {
-        "start": "node index.js ",
-        "server": "nodemon index.js",
-        "next": "next",
+        "start": "NODE_ENV=production node index.js ",
         "build": "next build",
-        "dev": "concurrently \"npm run server\" \"npm run next\"",
+        "dev": "nodemon index.js",
         "test": "echo no test ",
         "fix-code": "prettier-eslint --write 'src/**/*.{js,jsx}' ",
         "fix-styles": "prettier-stylelint --write 'src/**/*.{css,scss}' "
@@ -25,7 +23,6 @@
         "body-parser": "^1.18.3",
         "buffer-to-stream": "^1.0.0",
         "client-sessions": "^0.8.0",
-        "concurrently": "^4.1.0",
         "cookie-session": "^2.0.0-beta.3",
         "dotenv": "^6.2.0",
         "eslint": "5.12.0",
