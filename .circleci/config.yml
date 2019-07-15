@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: google/cloud-sdk:252.0.0
+      - image: circleci/node:10.15.3-stretch
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
