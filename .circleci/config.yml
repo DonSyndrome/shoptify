@@ -36,8 +36,12 @@ jobs:
       # run tests!
       - run: yarn test
 
+      # install client dep!
+      - run: cd client && yarn
       # build the app!
-      - run: cd client | yarn build | cd ../
+      - run: yarn build 
+      # go back to the roots!
+      - run: cd ../
 
       # install the gcloud sdk:
       # Add the Cloud SDK distribution URI as a package source
