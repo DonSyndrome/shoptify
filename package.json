@@ -9,10 +9,10 @@
     "main": "index.js",
     "scripts": {
         "start": "nodemon index.js ",
-        "prestart": "npm run-script build --prefix client",
         "server": "nodemon index.js",
         "client": "npm start --prefix client",
         "dev": "concurrently \"npm run server\" \"npm run client\"",
+        "test": "echo no test ",
         "fix-code": "prettier-eslint --write 'src/**/*.{js,jsx}' ",
         "fix-styles": "prettier-stylelint --write 'src/**/*.{css,scss}' "
     },
