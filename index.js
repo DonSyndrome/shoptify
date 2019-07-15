@@ -21,6 +21,7 @@ const config = require("./config/config");
 
 const addRequestId = require("express-request-id")();
 
+console.log('connecting to db:'+process.env.MONGO_DB)
 config.connectDB();
 
 // Generate UUID for request and add it to X-Request-Id header. To work along with morgan logging. Adding a request id to the request object, to facilitate tying different log entries to each other. So a Request log and its associated Response log would have the same id.
