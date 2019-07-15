@@ -14,7 +14,8 @@ const employeeRoutes = require("./routes/employeeRoutes");
 
 const next = require('next')
 var dev = process.env.NODE_ENV !== "production"
-const nextApp = next({ dev, conf: { distDir: "next/.next" }})
+console.log(`app is startind in: ${dev ? "dev" : "production"} mode`)
+const nextApp = next({ dev, conf: { distDir: ".next" }})
 const handle = nextApp.getRequestHandler()
 
 const next_handler = (req, res) => {
