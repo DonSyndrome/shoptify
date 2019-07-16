@@ -1,12 +1,6 @@
 import React from 'react';
-// var Playlist = mongoose.model('Playlist');
-import mongoose from 'mongoose';
-var Playlist = require('../../models/playlist');
 
 
-// var admin = require("firebase-admin");
-// // Fetch the service account key JSON file contents
-// var serviceAccount = require("../../firebase-key.json");
 
 
 const index =  ({ pid,data }) => (
@@ -19,9 +13,12 @@ const index =  ({ pid,data }) => (
   </p>
   </ul>
 )
-index.getInitialProps = async ({ query }) => {
-  const { pid } = query
-  const data = await Playlist.findOne(
+index.getInitialProps = async ({ query,req }) => {
+  if (req){
+    var mongoose = await req.mongodb;
+    const Playlist = await mongoose.models.Playlist;
+    const { pid } = query
+    const data = await Playlist.findOne(
     {
       "playlist_slug":pid,
     },
@@ -38,6 +35,9 @@ index.getInitialProps = async ({ query }) => {
   );
 
     return { pid,data };
+  } else{
+    return {};
+  }
 }
 
   export default index

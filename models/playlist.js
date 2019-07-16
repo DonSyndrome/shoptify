@@ -21,6 +21,7 @@ let PlaylistSchema = new Schema(
 // plugins
 PlaylistSchema.plugin(mongoosePaginate);
 
-const Playlist = mongoose.models.Playlist || mongoose.model("Playlist", PlaylistSchema);
+// const Playlist = mongoose.models.Playlist || mongoose.model("Playlist", PlaylistSchema);
+const Playlist = mongoose.model("Playlist", PlaylistSchema);
 
 module.exports = Playlist;

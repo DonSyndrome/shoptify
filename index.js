@@ -26,7 +26,7 @@ nextApp.prepare().then(() => {
   const app = express();
 
   console.log('connecting to db:'+process.env.MONGO_DB)
-  config.connectDB();
+  config.connectDB(app);
 
   // Generate UUID for request and add it to X-Request-Id header. To work along with morgan logging. Adding a request id to the request object, to facilitate tying different log entries to each other. So a Request log and its associated Response log would have the same id.
   app.use(addRequestId);
@@ -89,6 +89,7 @@ nextApp.prepare().then(() => {
       stream: process.stdout
     })
   );
+
 
   app.use("/api/department", departmentRoutes);
   app.use("/api/employee", employeeRoutes);
