@@ -1,8 +1,11 @@
 "use strict";
 
 let express = require("express"),
-  router = express.Router(),
-  Playlist = require("../models/playlist");
+    mongoose = require("mongoose"),
+    router = express.Router();
+
+var Playlist = require('../models/playlist')(mongoose);
+
 
 // To Add New Playlist
 router.post("/", (req, res, next) => {

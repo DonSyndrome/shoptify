@@ -1,6 +1,8 @@
 import React from 'react';
+// var Playlist = mongoose.model('Playlist');
 import mongoose from 'mongoose';
-var Playlist = mongoose.model('Playlist');
+var Playlist = require('../../models/playlist')(mongoose);
+
 
 // var admin = require("firebase-admin");
 // // Fetch the service account key JSON file contents
