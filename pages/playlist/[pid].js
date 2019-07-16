@@ -1,7 +1,7 @@
 import React from 'react';
 // var Playlist = mongoose.model('Playlist');
 import mongoose from 'mongoose';
-var Playlist = require('../../models/playlist')(mongoose);
+var Playlist = require('../../models/playlist');
 
 
 // var admin = require("firebase-admin");

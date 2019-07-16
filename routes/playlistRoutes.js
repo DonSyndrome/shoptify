@@ -1,10 +1,9 @@
 "use strict";
 
 let express = require("express"),
-    mongoose = require("mongoose"),
     router = express.Router();
 
-var Playlist = require('../models/playlist')(mongoose);
+var Playlist = require('../models/playlist');
 
 
 // To Add New Playlist
