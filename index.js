@@ -20,6 +20,7 @@ const spotifyCallbackRoute = require("./routes/spotifyCallbackRoute");
 const next = require('next')
 var dev = process.env.NODE_ENV !== "production"
 console.log(`app is startind in: ${dev ? "dev" : "production"} mode`)
+console.log(`app is runing in: ${process.env.SITE_URL}`)
 const nextApp = next({ dev, conf: { distDir: ".next" }})
 const handle = nextApp.getRequestHandler()
 

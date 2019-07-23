@@ -39,6 +39,8 @@ jobs:
       - run: echo MONGO_DB=$MONGO_DB > .env
       # add the Spotify client secret to the env file (watch the >> insted of >)
       - run: echo SPOTIFY_CLIENT_SECRET=$SPOTIFY_CLIENT_SECRET >> .env
+      # add the Spotify client secret to the env file (watch the >> insted of >)
+      - run: echo SITE_URL=$SITE_URL >> .env
 
       # build next server!
       - run:  yarn build 
