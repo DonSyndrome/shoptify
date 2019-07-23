@@ -11,6 +11,7 @@ const index =  ({ pid,data }) => (
   <p>
     {JSON.stringify(data)}
   </p>
+  <a href={'/login-with-spotify?folow-playlist=["2tWQ5raOOYMTs3W6y0W9Y9","4uv9UR7iPeD12LkkV7dXPm"]'}>Log in with Spotify</a>
   </ul>
 )
 index.getInitialProps = async ({ query,req }) => {

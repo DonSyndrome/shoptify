@@ -8,10 +8,14 @@ const methodOverride = require("method-override");
 const url = require("url");
 const config = require("./config/config");
 const addRequestId = require("express-request-id")();
+const cookieParser = require('cookie-parser');
+
 
 const departmentRoutes = require("./routes/departmentRoutes");
 const employeeRoutes = require("./routes/employeeRoutes");
 const playlistRoutes = require("./routes/playlistRoutes");
+const spotifyLogInRoute = require("./routes/spotifyLogInRoute");
+const spotifyCallbackRoute = require("./routes/spotifyCallbackRoute");
 
 const next = require('next')
 var dev = process.env.NODE_ENV !== "production"
@@ -34,6 +38,8 @@ nextApp.prepare().then(() => {
   app.use(methodOverride("_method"));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(cookieParser());
+
 
   morgan.token("id", function getId(req) {
     return req.id;
@@ -89,11 +95,14 @@ nextApp.prepare().then(() => {
       stream: process.stdout
     })
   );
-
+  
 
   app.use("/api/department", departmentRoutes);
   app.use("/api/employee", employeeRoutes);
   app.use("/api/playlist", playlistRoutes);
+
+  app.get("/login-with-spotify", spotifyLogInRoute);
+  app.get("/spotify-callback", spotifyCallbackRoute);
 
 
 

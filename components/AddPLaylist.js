@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
+import createInput from './useInput';
 
 const AddPlaylistForm = () => {
   const [Playlist_name, setPlaylist_name] = useState('');
   const [playlist_url, setplaylist_url] = useState('');
+  const [ThingComponenet, ThingComponenetValue] = createInput('input',useState('fuck'));
+  
 
   return (
     <div>
       <p>
         {`
           Playlist_name:${Playlist_name},
-          playlist_url: ${playlist_url}
+          playlist_url: ${playlist_url},
+          Thing_componenet: ${ThingComponenetValue},
         `}
       </p>
       <form action="#">    
@@ -33,6 +37,7 @@ const AddPlaylistForm = () => {
               onChange={(e)=>(setplaylist_url(e.target.value))}
               />
         </div>
+        <ThingComponenet key={'oneByOne'}/>
       </form>
       <style jsx >{`
 
