@@ -1,6 +1,7 @@
 import React from 'react';
 // import Link from 'next/link'
 import AddPlylist from '../../components/AddPLaylist';
+// import AddPlylist from '../../components/AddPLaylistHOC';
 
 const page =  ({data}) => (
   <div>
@@ -8,6 +9,7 @@ const page =  ({data}) => (
       this is the Add playlists page :D 
     </h1>
     <AddPlylist/>
+
     {/* <section>
       <form action="#" onsubmit="">
         <div class={'input-group'}>

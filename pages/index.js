@@ -1,20 +1,31 @@
-import React from 'react'
+import React , {Fragment} from 'react'
 import Link from 'next/link'
 import Head from '../components/head'
 import Nav from '../components/nav'
 
 const Home = () => (
-  <div>
+  
+  <Fragment>
     <Head title="Home" />
     <Nav />
+    <div className="parallax">
+      <div className="parallax__layer parallax__layer--back">
+        ...
+      </div>
+      <div className="parallax__layer parallax__layer--base">
+        <div>
+        <h1 className="title">התחל עכשיו</h1>
+        <button>
+        <Link href="./playlist/test">
+          עקוב
+        </Link>
+        </button>
+        </div>
+      </div>
+    </div>
 
-    <div className="hero">
-      <h1 className="title">Welcome to Next!</h1>
-      <p className="description">
-        To get started, edit <code>pages/index.js</code> and save to reload.
-      </p>
-
-      <div className="row">
+    <div className="villen">
+    <div className="row">
         <Link href="https://github.com/zeit/next.js#getting-started">
           <a className="card">
             <h3>Getting Started &rarr;</h3>
@@ -38,12 +49,49 @@ const Home = () => (
         </Link>
       </div>
     </div>
+   
+      <style jsx global>{`
+        html {
+          overflow: hidden;
+        }
+        body {
+          height: 100vh;
+          perspective: 1px;
+          transform-style: preserve-3d;
+          overflow-x:hidden;
+          overflow-y:auto;
+        }
+      `}</style>
 
     <style jsx>{`
-      .hero {
-        width: 100%;
-        color: #333;
+
+
+      .parallax {
+        width: 100vw;
+        height:100vh;
       }
+      .parallax__layer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+      .parallax__layer--base {
+        transform: translateZ(0);
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        color:white;
+
+      }
+      .parallax__layer--back {
+        transform: translateZ(-0.2px)scale(2);
+        background-image:url('static/home_page_bg.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+
       .title {
         margin: 0;
         width: 100%;
@@ -51,10 +99,18 @@ const Home = () => (
         line-height: 1.15;
         font-size: 48px;
       }
-      .title,
-      .description {
-        text-align: center;
+
+      .villen {
+        width: 100vw;
+        height:100vh;
+        background-color: hotpink;
+        z-index: 2;
+        position: relative;
       }
+
+ 
+
+
       .row {
         max-width: 880px;
         margin: 80px auto 40px;
@@ -85,7 +141,8 @@ const Home = () => (
         color: #333;
       }
     `}</style>
-  </div>
+  </Fragment>
+
 )
 
 export default Home

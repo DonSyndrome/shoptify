@@ -2,7 +2,9 @@ import React from 'react'
 import Link from 'next/link'
 
 const links = [
-  { href: 'https://github.com/segmentio/create-next-app', label: 'Github' }
+  { href: '/404', label: 'כשרונות צעירים' },
+  { href: '/404', label: 'מצעד' },
+  { href: '/', label: 'בית' },
 ].map(link => {
   link.key = `nav-link-${link.href}-${link.label}`
   return link
@@ -11,20 +13,13 @@ const links = [
 const Nav = () => (
   <nav>
     <ul>
-      <li>
-        <Link prefetch href="/">
-          <a>Home</a>
-        </Link>
-      </li>
-      <ul>
-        {links.map(({ key, href, label }) => (
-          <li key={key}>
-            <Link href={href}>
-              <a>{label}</a>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {links.map(({ key, href, label }) => (
+        <li key={key}>
+          <Link href={href}>
+            <a>{label}</a>
+          </Link>
+        </li>
+      ))}
     </ul>
 
     <style jsx>{`
@@ -35,22 +30,32 @@ const Nav = () => (
       }
       nav {
         text-align: center;
+        position: absolute;
+        right: 0;
+        left: 0;
+        top: 0;
+        z-index: 1;
+
       }
       ul {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
+        background-color: #333;
+
       }
       nav > ul {
         padding: 4px 16px;
+        margin: 0;
       }
       li {
         display: flex;
-        padding: 6px 8px;
+        padding: 8px 16px;
       }
       a {
-        color: #067df7;
+        color: #a3a3a3;
         text-decoration: none;
-        font-size: 13px;
+        font-size: 24px;
+        font-weight: 100;
       }
     `}</style>
   </nav>
