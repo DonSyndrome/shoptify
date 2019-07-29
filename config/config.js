@@ -12,9 +12,15 @@ module.exports = {
   },
 
   // Connect connection with MongoDB Database
-  connectDB: function() {
-    mongoose.connect(this.database, this.options);
-  },
+  connectDB: function(app) {
+    const mongoDb = mongoose.connect(this.database, this.options);
+      //  add the mongodb and the mod
+      app.use((req, res, next) => {
+        req.mongodb = mongoDb
+        // Logging req.mysqldb/req.mongodb at this point gives the correct result.
+        next()
+      });
+},
 
   // Disconnect connection with MongoDB Database
   disconnectDB: function() {
