@@ -1,8 +1,5 @@
 import React from 'react';
-// import Link from 'next/link'
-// import AddPlylist from '../../components/AddPLaylist';
 import AddPlylist from '../../src/components/AddPLaylistHOC';
-
 
 const page =  ({data}) => (
   <div>
