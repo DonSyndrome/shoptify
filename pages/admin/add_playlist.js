@@ -3,6 +3,7 @@ import React from 'react';
 // import AddPlylist from '../../components/AddPLaylist';
 import AddPlylist from '../../src/components/AddPLaylistHOC';
 
+
 const page =  ({data}) => (
   <div>
     <h1>
