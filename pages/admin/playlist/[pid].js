@@ -1,18 +1,18 @@
 import React from 'react';
 
+const index =  ({ pid,data }) => {
+  return (
+    <ul>
+    <h1>
+      playlist number:{ pid }
+    </h1>
+    <p>
+      {JSON.stringify(data)}
+    </p>
+    </ul>
+  )
+}
 
-
-
-const index =  ({ pid,data }) => (
-  <ul>
-  <h1>
-    playlist number:{ pid }
-  </h1>
-  <p>
-    {JSON.stringify(data)}
-  </p>
-  </ul>
-)
 index.getInitialProps = async ({ query,req }) => {
   if (req){
     var mongoose = await req.mongodb;
@@ -40,5 +40,6 @@ index.getInitialProps = async ({ query,req }) => {
   }
 }
 
-  export default index
+export default index
+
   

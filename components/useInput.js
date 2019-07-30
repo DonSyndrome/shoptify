@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const toFindBetterName = (inputName,[Value,SetValue]) => {
-    return [() => {
+const toFindBetterName = ({object:{inputName,SetValue,Value}}) => {
         return (
             <div className={'input-group'} >
                 <label htmlFor={inputName}>
@@ -13,9 +12,9 @@ const toFindBetterName = (inputName,[Value,SetValue]) => {
                 name={inputName}
                 id={inputName}
                 value={Value}
-                onChange={(e)=>(SetValue(e.target.value))}
+                onChange={(e)=>{SetValue(e.target.value)}}
                 />
             </div>
-        )},Value]
+        )
 };
 export default toFindBetterName
