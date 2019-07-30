@@ -6,16 +6,16 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const url = require("url");
-const config = require("./config/config");
+const config = require("./src/config/config");
 const addRequestId = require("express-request-id")();
 const cookieParser = require('cookie-parser');
 
 
-const departmentRoutes = require("./routes/departmentRoutes");
-const employeeRoutes = require("./routes/employeeRoutes");
-const playlistRoutes = require("./routes/playlistRoutes");
-const spotifyLogInRoute = require("./routes/spotifyLogInRoute");
-const spotifyCallbackRoute = require("./routes/spotifyCallbackRoute");
+const departmentRoutes = require("./src/routes/departmentRoutes");
+const employeeRoutes = require("./src/routes/employeeRoutes");
+const playlistRoutes = require("./src/routes/playlistRoutes");
+const spotifyLogInRoute = require("./src/routes/spotifyLogInRoute");
+const spotifyCallbackRoute = require("./src/routes/spotifyCallbackRoute");
 
 const next = require('next')
 var dev = process.env.NODE_ENV !== "production"

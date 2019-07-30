@@ -1,7 +1,7 @@
 "use strict";
 
 let querystring = require('querystring'),
-    constants = require('../constants'),
+    constants = require('../../constants'),
     generateRandomString = require('../utils/generateRandomString');
 
 // To Add New Playlist

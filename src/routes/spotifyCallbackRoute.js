@@ -2,7 +2,7 @@
 
 let querystring = require('querystring'),
     request = require('request'),
-    constants = require('../constants');
+    constants = require('../../constants');
 
     
 function followPlaylist({playlistID,access_token}){
