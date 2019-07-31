@@ -16,7 +16,7 @@ module.exports = {
     const mongoDb = mongoose.connect(this.database, this.options);
       //  add the mongodb and the mod
       app.use((req, res, next) => {
-        req.mongodb = mongoDb
+        req.mongodb = mongoDb;
         // Logging req.mysqldb/req.mongodb at this point gives the correct result.
         next()
       });

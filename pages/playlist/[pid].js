@@ -1,45 +1,39 @@
 import React from 'react';
+import PlaylistLP from '../../src/components/PlaylistLP';
+//https://images.unsplash.com/photo-1496737018672-b1a6be2e949c
 
-
-
-
-const index =  ({ pid,data }) => (
-  <ul>
-  <h1>
-    playlist number:{ pid }
-  </h1>
-  <p>
-    {JSON.stringify(data)}
-  </p>
-  <a href={'/login-with-spotify?folow-playlist=["2tWQ5raOOYMTs3W6y0W9Y9","4uv9UR7iPeD12LkkV7dXPm"]'}>Log in with Spotify</a>
-  </ul>
-)
-index.getInitialProps = async ({ query,req }) => {
-  if (req){
+const index = ({ pid, data }) => {
+  return (
+    <main>
+      <PlaylistLP playlist={data} />
+    </main>
+  )
+}
+index.getInitialProps = async ({ query, req }) => {
+  if (req) {
     var mongoose = await req.mongodb;
     const Playlist = await mongoose.models.Playlist;
     const { pid } = query
     const data = await Playlist.findOne(
-    {
-      "playlist_slug":pid,
-    },
-    null,
-    {},
-    (err, docs) => {
-      if (err) {
-        console.log(err)
-        return {};
-      } else {
-        return docs;
+      {
+        "playlist_slug": pid,
+      },
+      null,
+      {},
+      (err, docs) => {
+        if (err) {
+          console.log(err)
+          return {};
+        } else {
+          return docs;
+        }
       }
-    }
-  );
+    );
 
-    return { pid,data };
-  } else{
+    return { pid, data };
+  } else {
     return {};
   }
 }
-
-  export default index
-  
+export const config = { amp: true };
+export default index

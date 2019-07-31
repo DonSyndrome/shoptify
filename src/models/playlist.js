@@ -7,10 +7,11 @@ const mongoose = require("mongoose"),
 let PlaylistSchema = new Schema(
   {
     playlist_slug: { type: String, unique: true },
-    playlist_name: { type: String },
     spotify_uri:  { type: String },
+    playlist_name: { type: String },
+    playlist_author: { type: String },
     background_image_url:  { type: String },
-    description:  { type: String },
+    playlist_image_url:  { type: String },
   },
   {
     // createdAt,updatedAt fields are automatically added into records

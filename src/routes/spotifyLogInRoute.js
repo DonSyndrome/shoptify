@@ -1,7 +1,7 @@
 "use strict";
 
 let querystring = require('querystring'),
-    constants = require('../constants'),
+    constants = require('../../constants'),
     generateRandomString = require('../utils/generateRandomString');
 
 // To Add New Playlist
@@ -13,10 +13,13 @@ const spotifyLogInRoute = function(req, res) {
 
   res.cookie(constants.SPOTIFY_STATE_KEY, state);
   res.cookie(constants.PLAYLISTS_TO_FOLOW, playlistsToFolow);
-
-
-  // your application requests authorization
   var scope = 'user-read-private user-read-email playlist-modify-private playlist-modify-public';
+
+
+  if (playlistsToFolow) {
+
+  }
+  // your application requests authorization
   res.redirect('https://accounts.spotify.com/authorize?' + querystring.stringify({
     response_type: 'code',
     client_id: constants.SPOTIFY_CLIENT_ID,
