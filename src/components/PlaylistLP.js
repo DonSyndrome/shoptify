@@ -1,5 +1,8 @@
 import React from "react";
 import CTAButton from './CTAButton';
+import styles from '../styles/index';
+import { useAmp } from 'next/amp'
+
 
 const PlaylistLP = props => {
   const {
@@ -9,6 +12,8 @@ const PlaylistLP = props => {
     spotify_uri,
     background_image_url
   } = props.playlist;
+  const isAmp = useAmp()
+
   return (
     <div className={'playlist-container'}>
       {/* altho this classLess div may see uncecery but it is */}
@@ -21,17 +26,25 @@ const PlaylistLP = props => {
             </div>
           </div>
           <div className={'image-container'}>
-            <amp-img alt="A view of the sea"
+            {isAmp ?
+            <amp-img 
+              alt={playlist_name}
               src={playlist_image_url}
               width="300"
               height="300"
               layout="responsive"
+            /> :
+            <img 
+              src={playlist_image_url}
+              alt={playlist_name}
             />
+          }
+
             <div className="cta-container">
               <a href={`/login-with-spotify?folow-playlist=["${spotify_uri}"]`}>
                 <CTAButton>
                   Folow in with Spotify
-                                </CTAButton>
+                </CTAButton>
               </a>
             </div>
           </div>
@@ -41,11 +54,11 @@ const PlaylistLP = props => {
       </div>
       <style jsx>{`
               .playlist-container {
+                ${styles.mixins.heroMinHeight}
                 width: 100%;
                 padding: 2em;
                 margin: auto;
                 background-image:linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 23%, rgba(0,0,0,0.25) 100%),url(${background_image_url});
-                min-height:calc(100vh - 50px);
                 height: 100%;
                 display: flex;
                 flex-direction: column;
@@ -89,7 +102,7 @@ const PlaylistLP = props => {
                 font-size:1.6rem;
               }
               
-              @media (min-width: 1200px) {
+              @media (min-width:${styles.breakPoint.desktop}) {
                 .card {
                   flex-direction: row;
                   justify-content: center;
@@ -104,10 +117,7 @@ const PlaylistLP = props => {
                   margin: 0;
                 }
               }
-              
-
-            `}
-      </style>
+    `}</style>
     </div>
   )
 }

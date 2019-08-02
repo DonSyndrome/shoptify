@@ -1,20 +1,23 @@
 import React from 'react';
 import AddPlylist from '../../src/components/AddPLaylistHOC';
 
-const page =  ({data}) => (
-  <div>
-    <h1>
-      this is the Add playlists page :D 
-    </h1>
-    <AddPlylist/>
 
+const page =  () => {
 
-    <style jsx>{`
-
+  return (
+    <div className="layout">
+      <AddPlylist
+      />
+      <style jsx>{`
+  .layout {
+    max-width: 1200px;
+    margin: auto;
+  }
       `}</style>
-  </div>
-
-)
+    </div>
+  
+  )
+}
 
 
   export default page
