@@ -4,6 +4,7 @@ import AddPlylist from '../../src/components/AddPLaylistHOC';
 
 const page =  () => {
 
+
   return (
     <div className="layout">
       <AddPlylist
