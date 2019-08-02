@@ -69,6 +69,8 @@ const spotifyCallback = function(req, res) {
           });
         }
         // we can also pass the token to the browser to make requests from there
+        res.cookie(constants.SPOTIFY_ACSESS_TOKEN_KEY, access_token);
+
         res.redirect('/#' +
           querystring.stringify({
             access_token: access_token,

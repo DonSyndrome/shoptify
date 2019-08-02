@@ -1,22 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 // import Link from 'next/link'
 // import AddPlylist from '../../components/AddPLaylist';
-import AddPlylist from '../../src/components/AddPLaylistHOC';
+// import AddPlylist from '../../src/components/AddPLaylistHOC';
+import AddPlylist from '../../src/components/formik/AddPlaylistFormik';
 
-const page =  ({data}) => (
-  <div>
-    <h1>
-      this is the Add playlists page :D 
-    </h1>
-    <AddPlylist/>
+const page =  ({data}) => {
 
-
-    <style jsx>{`
-
+  return (
+    <div className="layout">
+      <AddPlylist
+      />
+      <style jsx>{`
+  .layout {
+    max-width: 1200px;
+    margin: auto;
+  }
       `}</style>
-  </div>
-
-)
+    </div>
+  
+  )
+}
 
 
   export default page
