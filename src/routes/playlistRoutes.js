@@ -1,22 +1,29 @@
 "use strict";
 
 let express = require("express"),
-    router = express.Router();
+    router = express.Router(),
+    playlistYup = require("../models/playlistYup")
 
 var Playlist = require('../models/playlist');
 
 
 // To Add New Playlist
-router.post("/", (req, res, next) => {
-  let playlist = new Playlist(req.body);
+router.post("/", async (req, res, next) => {
+  let requestBody = req.body;
+  try {
+    playlistYup.validate(requestBody);
+  } catch (err) {
+    console.log(err);
+    res.status(400).send(err);
+
+  }
+  let playlist = new Playlist(requestBody);
   playlist.save((error, newDocument) => {
     if (error) {
-      if (error.name === "MongoError" && error.code === 11000) {
-        // console.log("DUPLICATE IN BACK END IS ", error);
-        res.status(400).send(error);
-      } else {
-        next(error);
-      }
+      // if (error.code === 11000) {
+      //   return res.status(400).send('playlist Slug alrady exist');
+      // }
+      res.status(400).send(error);
     } else {
       res.status(200).send(newDocument);
     }

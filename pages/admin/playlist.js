@@ -28,6 +28,11 @@ const page =  ({data}) => (
             <a>edit</a>
           </Link>
         </div>
+        <div>
+          <Link href={`/playlist/${playlist.playlist_slug}`}>
+            <a>preview</a>
+          </Link>
+        </div>
       </li>
       ))}
     </ul>
