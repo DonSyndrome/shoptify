@@ -1,5 +1,5 @@
 import React from 'react';
-import AddPlylist from '../../src/components/AddPLaylistHOC';
+import AddPlylist from '../../src/components/formik/AddPlaylistFormik';
 
 
 const page =  () => {
