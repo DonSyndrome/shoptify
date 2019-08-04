@@ -1,5 +1,5 @@
 import React from 'react';
-import PlaylistLP from '../../src/components/PlaylistLP';
+import PlaylistLP from '../../src/components/Templates/PlaylistLP';
 //https://images.unsplash.com/photo-1496737018672-b1a6be2e949c
 
 const index = ({ pid, data }) => {

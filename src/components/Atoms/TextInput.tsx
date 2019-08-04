@@ -14,7 +14,7 @@ const InputFeedback = ({ error }) =>
     </div>
   ) : null;
 
-const Label = ({ error, className, children, ...props }) => {
+const Label = ({ error, children, ...props }) => {
   return (
     <label className="label" {...props}>
       {children}
@@ -41,7 +41,7 @@ const TextInput = ({
 }) => {
   return (
     <div className="input-group">
-      <Label htmlFor={id} error={error} className={''}>
+      <Label htmlFor={id} error={error}>
         {label}
       </Label>
       <input

@@ -1,11 +1,10 @@
-import React from "react";
+import React , {useState} from "react";
 import { withFormik } from "formik";
-import Nav from '../../components/nav'
-import PlaylistLP from '../PlaylistLP';
+import PlaylistLP from '../Templates/PlaylistLP';
 import getCockie from '../../utils/getCockie';
 import { SPOTIFY_ACSESS_TOKEN_KEY } from '../../../constants';
 import styles from "../../styles/index";
-import TextInput from "./TextInput";
+import TextInput from "../Atoms/TextInput";
 import playlistYup from "../../models/playlistYup";
 
 const getSiteURL = () => process.env.SITE_URL ? process.env.SITE_URL : document.location.origin;
@@ -66,16 +65,18 @@ const MyForm = props => {
     setFieldValue,
     handleReset,
     isSubmitting,
-    isValid
+    isValid,
+    validateForm,
   } = props;
+  const [ PreviewError, SetPreviewError ] = useState({
+    error:'no data requested yet :D'
+  });
   const getPreviewFromSpotify = (e) => {
-    e.preventDefault();
-    console.log(values);
+    validateForm();
     const playlistId = values.spotify_uri;
     if (playlistId) {
       const spotifyGetPlaylistEndpoint = `https://api.spotify.com/v1/playlists/${playlistId}?market=IL&fields=images%2C%20name%2C%20owner`
       const spotifyAccsesToken = getCockie(SPOTIFY_ACSESS_TOKEN_KEY);
-
       var obj = {
         method: 'GET',
         headers: {
@@ -83,7 +84,6 @@ const MyForm = props => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${spotifyAccsesToken}`
         }
-
       }
 
       fetch(spotifyGetPlaylistEndpoint, obj)
@@ -106,7 +106,13 @@ const MyForm = props => {
           alart(JSON.stringify(reason))
         });
     }
-  };
+    else {
+      SetPreviewError({
+        error:'cant generet preview without all the fields',
+      }) 
+    }
+  }
+  
   return (
     <div className={'layout'}>
       <div className={'form-container'}>
@@ -147,9 +153,13 @@ const MyForm = props => {
           <button type="button" disabled={isSubmitting} onClick={getPreviewFromSpotify}>
             Preview Page
           </button>
-          <p>
-            plase preview the page and make shure it is ok before submitting :D
+          {
+            PreviewError && PreviewError.error &&
+            <p>
+            {PreviewError.error}
           </p>
+          }
+          
           <br/>
           <button
             type="button"
@@ -165,8 +175,8 @@ const MyForm = props => {
        
           {/* <pre>
             {JSON.stringify(props, null, 2)}
-          </pre>
-          <pre>
+          </pre> */}
+          {/* <pre>
             {Object.keys(props).join('\n')}
           </pre> */}
         </form>

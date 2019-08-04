@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from '../styles'
+import styles from '../../styles'
 
-export default function CTAButton({children}) {
+const CTAButton = ({children})=> {
     return (
         <div>
             <button>
@@ -23,10 +23,8 @@ export default function CTAButton({children}) {
             button :hover {
                 transform: translateY(-3px);
             }
-            
             `}</style>
         </div>
     )
 }
-
-// background-color:${colors.SpotifyGreen};
+export default CTAButton

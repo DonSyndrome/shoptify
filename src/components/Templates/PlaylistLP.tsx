@@ -1,7 +1,7 @@
 import React from "react";
-import CTAButton from './CTAButton';
-import styles from '../styles/index';
-import { useAmp } from 'next/amp'
+import styles from '../../styles/index';
+import CTAButton from '../Atoms/CTAButton';
+import Image, { Layout } from '../Atoms/Image';
 
 
 const PlaylistLP = props => {
@@ -12,12 +12,11 @@ const PlaylistLP = props => {
     spotify_uri,
     background_image_url
   } = props.playlist;
-  const isAmp = useAmp()
 
   return (
-    <div className={'playlist-container'}>
-      {/* altho this classLess div may see uncecery but it is */}
-      <div>
+   
+      <div className={'playlist-container'}>
+        {/* altho this classLess div may see uncecery but it is */}
         <div className={'card'}>
           <div className={'texts'}>
             <div>
@@ -26,20 +25,13 @@ const PlaylistLP = props => {
             </div>
           </div>
           <div className={'image-container'}>
-            {isAmp ?
-            <amp-img 
+            <Image
               alt={playlist_name}
               src={playlist_image_url}
               width="300"
               height="300"
-              layout="responsive"
-            /> :
-            <img 
-              src={playlist_image_url}
-              alt={playlist_name}
+              layout={Layout.responsive}
             />
-          }
-
             <div className="cta-container">
               <a href={`/login-with-spotify?folow-playlist=["${spotify_uri}"]`}>
                 <CTAButton>
@@ -51,15 +43,17 @@ const PlaylistLP = props => {
 
 
         </div>
-      </div>
-      <style jsx>{`
+        <style jsx>{`
               .playlist-container {
                 ${styles.mixins.heroMinHeight}
+                height: 100%;
                 width: 100%;
                 padding: 2em;
                 margin: auto;
                 background-image:linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 23%, rgba(0,0,0,0.25) 100%),url(${background_image_url});
-                height: 100%;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center; 
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -69,7 +63,6 @@ const PlaylistLP = props => {
                 flex-direction:column;
                 text-align: center;
                 margin: auto;
-                margin-bottom: 20px;
               }
               .card img {
                 box-shadow: 0px 10px 13px -11px rgba(79,79,79,1);
@@ -78,12 +71,12 @@ const PlaylistLP = props => {
                 display:flex;
                 flex-direction:column;
                 justify-content: center;
-                padding: 2em;
                 text-shadow: 2px 2px 4px rgba(84,84,84,0.53);
               }
               
               .image-container {
                 margin:0 auto;
+           
               }
   
               .cta-container {
@@ -101,7 +94,7 @@ const PlaylistLP = props => {
                 font-weight:100;
                 font-size:1.6rem;
               }
-              
+
               @media (min-width:${styles.breakPoint.desktop}) {
                 .card {
                   flex-direction: row;
@@ -117,8 +110,10 @@ const PlaylistLP = props => {
                   margin: 0;
                 }
               }
+
     `}</style>
-    </div>
+      </div>
+
   )
 }
 export default PlaylistLP

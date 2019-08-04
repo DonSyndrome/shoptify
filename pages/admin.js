@@ -1,19 +1,13 @@
 import React , {Fragment} from 'react';
-import Head from '../src/components/Organisms/head';
-import Hero from "../src/components/Organisms/Hero";
+import Head from '../src/components/Organisms/';
 import style from '../src/styles/index';
 
 
 const Home = () => (
-  
   <Fragment>
-    <Head title="Tunelist homepage" />
-    <Hero/>  
-
+    <Head title="Admin Page" />
     <div className="villen">
-      <div>
-        
-      </div>
+      welcome to the admin page
     </div>
     <style jsx>{`
       .villen {
@@ -26,7 +20,6 @@ const Home = () => (
     `}</style>
     
   </Fragment>
-
 )
 
 export default Home

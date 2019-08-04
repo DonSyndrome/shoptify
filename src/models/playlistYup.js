@@ -12,9 +12,13 @@ const PlaylistYupSchema = Yup.object().shape({
     .required("Background mage url is required."),
   spotify_uri: Yup.string()
     .required("no magic no mizraHits no tikwa"),
-  playlist_image_url: Yup.string(),
-  playlist_author: Yup.string(),
-  playlist_name: Yup.string(),
   playlist_image_url: Yup.string()
+    .required("playlist image url is required"),
+  playlist_author: Yup.string()
+  .required("playlist author is required"),
+  playlist_name: Yup.string()
+  .required("playlist name is required"),
+  playlist_image_url: Yup.string()
+  .required("playlist image url is required"),
 })
 module.exports = PlaylistYupSchema;

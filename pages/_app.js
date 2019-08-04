@@ -1,6 +1,6 @@
 import React from 'react';
 import App, { Container } from 'next/app';
-import Nav from '../src/components/nav'
+import Nav from '../src/components/Organisms/nav'
 
 
 
