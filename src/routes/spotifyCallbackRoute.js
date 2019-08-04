@@ -34,6 +34,7 @@ const spotifyCallback = function(req, res) {
   var state = req.query.state || null;
   var storedState = req.cookies ? req.cookies[constants.SPOTIFY_STATE_KEY] : null;
   var playlistToFolow = req.cookies ? req.cookies[constants.PLAYLISTS_TO_FOLOW] : null;
+  var redirect = req.cookies ? req.cookies['redirect'] : null;
 
 
   if (state === null || state !== storedState) {
@@ -70,14 +71,14 @@ const spotifyCallback = function(req, res) {
         }
         // we can also pass the token to the browser to make requests from there
         res.cookie(constants.SPOTIFY_ACSESS_TOKEN_KEY, access_token);
-
-        res.redirect('/#' +
-          querystring.stringify({
-            access_token: access_token,
-            refresh_token: refresh_token
-          }));
+        if (redirect) {
+          res.clearCookie('redirect');
+          res.redirect(redirect);
+        } else {
+          res.redirect('/');
+        }
       } else {
-        res.redirect('/#' +
+        res.redirect(redirect ? redirect : '/#' +
           querystring.stringify({
             error: 'invalid_token'
           }));

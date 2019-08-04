@@ -1,5 +1,5 @@
 import React from 'react';
-import AddPlylist from '../../src/components/formik/AddPlaylistFormik';
+import AddPlylist from '../../src/components/Molecules/AddPlaylistForm';
 
 
 const page =  () => {
@@ -21,5 +21,5 @@ const page =  () => {
 }
 
 
-  export default page
+export default page
   
