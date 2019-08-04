@@ -1,11 +1,14 @@
 import React from 'react'
 import styles from '../../styles'
 
-const CTAButton = ({children})=> {
+type Props = {
+    children?: string | null; 
+}
+const CTAButton = (props:Props) => {
     return (
         <div>
             <button>
-                {children}
+                {props.children}
             </button>
             <style jsx>{`
             button{
