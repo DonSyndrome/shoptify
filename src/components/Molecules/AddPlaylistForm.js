@@ -1,4 +1,4 @@
-import React , {useState} from "react";
+import React, { useState } from "react";
 import { withFormik } from "formik";
 import PlaylistLP from '../Templates/PlaylistLP';
 import getCockie from '../../utils/getCockie';
@@ -34,20 +34,20 @@ const formikEnhancer = withFormik({
       },
       body: JSON.stringify(payload),
     }
-    fetch(postNewPlaylist,options)
-    .then(response =>{
-      if (!response.ok) {
-        alert('problem With Server' + JSON.stringify(response))
-        errors.server = response;
-      }
-      return(response)
-    })
-    .then(response => response.json())
-    .then((response)=> {
-      alert('saved with sucsess' + JSON.stringify(response))
-     
-      return response;
-    })
+    fetch(postNewPlaylist, options)
+      .then(response => {
+        if (!response.ok) {
+          alert('problem With Server' + JSON.stringify(response))
+          errors.server = response;
+        }
+        return (response)
+      })
+      .then(response => response.json())
+      .then((response) => {
+        alert('saved with sucsess' + JSON.stringify(response))
+
+        return response;
+      })
     setSubmitting(false);
   },
   displayName: "MyForm"
@@ -68,12 +68,12 @@ const MyForm = props => {
     isValid,
     validateForm,
   } = props;
-  const [ PreviewError, SetPreviewError ] = useState({
-    error:'no data requested yet :D'
+  const [PreviewError, SetPreviewError] = useState({
+    error: 'no data requested yet :D'
   });
   const getPreviewFromSpotify = (e) => {
     validateForm();
-    const playlistId = values.spotify_uri;
+    const playlistId = shortenUriLink(values.spotify_uri);
     if (playlistId) {
       const spotifyGetPlaylistEndpoint = `https://api.spotify.com/v1/playlists/${playlistId}?market=IL&fields=images%2C%20name%2C%20owner`
       const spotifyAccsesToken = getCockie(SPOTIFY_ACSESS_TOKEN_KEY);
@@ -96,35 +96,35 @@ const MyForm = props => {
             const playlist_image_url = myJson.images[0].url;
             const playlist_author = myJson.owner.display_name;
             const playlist_name = myJson.name;
-            setFieldValue('playlist_image_url',playlist_image_url);
-            setFieldValue('playlist_author',playlist_author);
-            setFieldValue('playlist_name',playlist_name);
+            setFieldValue('playlist_image_url', playlist_image_url);
+            setFieldValue('playlist_author', playlist_author);
+            setFieldValue('playlist_name', playlist_name);
           } else {
             console.log('bad response from spotify api')
           }
-        }).catch((reason)=>{
+        }).catch((reason) => {
           alart(JSON.stringify(reason))
         });
     }
     else {
       SetPreviewError({
-        error:'cant generet preview without all the fields',
-      }) 
+        error: 'cant generet preview without all the fields',
+      })
     }
   }
-  
+
   return (
     <div className={'layout'}>
       <div className={'form-container'}>
         <h1>
-          this is the Add playlists page :D
+          Add your playlist to Tunelist
         </h1>
         <form onSubmit={handleSubmit}>
           <TextInput
             id="playlist_slug"
             type="text"
-            label={`playlist slug ${values.playlist_slug && `(short url:${getSiteURL()}/playlist/${values.playlist_slug})`}`}
-            placeholder="short n` chatchy"
+            label={`Playlist link ${values.playlist_slug && `(Short url:${getSiteURL()}/playlist/${values.playlist_slug})`}`}
+            placeholder="Keep it short"
             error={touched.playlist_slug && errors.playlist_slug}
             value={values.playlist_slug}
             onChange={handleChange}
@@ -133,8 +133,8 @@ const MyForm = props => {
           <TextInput
             id="background_image_url"
             type="text"
-            label="Background image URL"
-            placeholder="please enter valid background image url in 16*9"
+            label="Background Image URL"
+            placeholder="Image url (Must be 16*9)"
             error={touched.background_image_url && errors.background_image_url}
             value={values.background_image_url}
             onChange={handleChange}
@@ -144,7 +144,7 @@ const MyForm = props => {
             id="spotify_uri"
             type="text"
             label="spotify_uri"
-            placeholder="please enter the uri of the playlist"
+            placeholder="Please enter the uri of the playlist"
             error={touched.spotify_uri && errors.spotify_uri}
             value={values.spotify_uri}
             onChange={handleChange}
@@ -156,11 +156,11 @@ const MyForm = props => {
           {
             PreviewError && PreviewError.error &&
             <p>
-            {PreviewError.error}
-          </p>
+              {PreviewError.error}
+            </p>
           }
-          
-          <br/>
+
+          <br />
           <button
             type="button"
             className="outline"
@@ -172,7 +172,7 @@ const MyForm = props => {
           <button type="submit" disabled={isSubmitting || !isValid}>
             Submit
           </button>
-       
+
           {/* <pre>
             {JSON.stringify(props, null, 2)}
           </pre> */}
@@ -181,13 +181,15 @@ const MyForm = props => {
           </pre> */}
         </form>
       </div>
-      {
-        // check that the data from spotify is present
-        values.playlist_name &&
-        <PlaylistLP
-          playlist={values}
-        />
-      }
+      <div className={'preview-container'}>
+        {
+          // check that the data from spotify is present
+          values.playlist_name &&
+          <PlaylistLP
+            playlist={values}
+          />
+        }
+      </div>
       <style jsx>{`
         .form-container{
               padding: 2em;
@@ -202,6 +204,17 @@ const MyForm = props => {
     </div>
   );
 };
+
+
+const shortenUriLink = (uriString) => {
+  if (uriString) {
+    // https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF?nd=1
+    const uriWithQuery = uriString.split('/')[4];
+
+    return uriWithQuery.includes('?') ? uriWithQuery.slice(0, uriWithQuery.indexOf('?')) : uriWithQuery;
+  }
+}
+
 
 const MyEnhancedForm = formikEnhancer(MyForm);
 

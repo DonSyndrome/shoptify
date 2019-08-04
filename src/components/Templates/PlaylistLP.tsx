@@ -14,36 +14,36 @@ const PlaylistLP = props => {
   } = props.playlist;
 
   return (
-   
-      <div className={'playlist-container'}>
-        {/* altho this classLess div may see uncecery but it is */}
-        <div className={'card'}>
-          <div className={'texts'}>
-            <div>
-              <h4>{playlist_name}</h4>
-              <h3>{playlist_author}</h3>
-            </div>
-          </div>
-          <div className={'image-container'}>
-            <Image
-              alt={playlist_name}
-              src={playlist_image_url}
-              width="300"
-              height="300"
-              layout={Layout.responsive}
-            />
-            <div className="cta-container">
-              <a href={`/login-with-spotify?folow-playlist=["${spotify_uri}"]`}>
-                <CTAButton>
-                  Folow in with Spotify
-                </CTAButton>
-              </a>
-            </div>
-          </div>
 
-
+    <div className={'playlist-container'}>
+      {/* altho this classLess div may see uncecery but it is */}
+      <div className={'card'}>
+        <div className={'texts'}>
+          <div>
+            <h4>{playlist_name}</h4>
+            <h3>{playlist_author}</h3>
+          </div>
         </div>
-        <style jsx>{`
+        <div className={'image-container'}>
+          <Image
+            alt={playlist_name}
+            src={playlist_image_url}
+            width="300"
+            height="300"
+            layout={Layout.responsive}
+          />
+          <div className="cta-container">
+            <a href={`/login-with-spotify?folow-playlist=["${spotify_uri}"]`}>
+              <CTAButton>
+                Folow in with Spotify
+                </CTAButton>
+            </a>
+          </div>
+        </div>
+
+
+      </div>
+      <style jsx>{`
               .playlist-container {
                 ${styles.mixins.heroMinHeight}
                 height: 100%;
@@ -55,12 +55,13 @@ const PlaylistLP = props => {
                 background-size: cover;
                 background-position: center; 
                 display: flex;
-                flex-direction: column;
+                flex-direction: column-reverse;
                 justify-content: center;
+                
               }
               .card {
                 display:flex;
-                flex-direction:column;
+                flex-direction:column-reverse;
                 text-align: center;
                 margin: auto;
               }
@@ -68,6 +69,9 @@ const PlaylistLP = props => {
                 box-shadow: 0px 10px 13px -11px rgba(79,79,79,1);
               }
               .texts {
+                padding-left: 0;
+                color: rgb(255, 255, 255); 
+                mix-blend-mode: difference;
                 display:flex;
                 flex-direction:column;
                 justify-content: center;
@@ -96,6 +100,9 @@ const PlaylistLP = props => {
               }
 
               @media (min-width:${styles.breakPoint.desktop}) {
+                .texts {
+                  padding-left: 2rem;
+                }
                 .card {
                   flex-direction: row;
                   justify-content: center;
@@ -112,7 +119,7 @@ const PlaylistLP = props => {
               }
 
     `}</style>
-      </div>
+    </div>
 
   )
 }
