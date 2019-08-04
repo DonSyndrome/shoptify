@@ -1,5 +1,5 @@
 import React , {Fragment} from 'react';
-import Head from '../src/components/Organisms/';
+import Head from '../src/components/Organisms/head';
 import style from '../src/styles/index';
 
 
