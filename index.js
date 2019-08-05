@@ -11,11 +11,12 @@ const addRequestId = require("express-request-id")();
 const cookieParser = require('cookie-parser');
 
 
-const departmentRoutes = require("./src/routes/departmentRoutes");
-const employeeRoutes = require("./src/routes/employeeRoutes");
-const playlistRoutes = require("./src/routes/playlistRoutes");
 const spotifyLogInRoute = require("./src/routes/spotifyLogInRoute");
 const spotifyCallbackRoute = require("./src/routes/spotifyCallbackRoute");
+
+// new Data Routes 
+const playlistRoutes = require("./src/api/playlist/playlist.routes");
+
 
 const next = require('next')
 var dev = process.env.NODE_ENV !== "production"
@@ -40,30 +41,16 @@ nextApp.prepare().then(() => {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(cookieParser());
+  app.use((req, res, next) => {
+      console.log(Object.keys(req));
+      console.log(req.secret);
+    next()
+  });
 
 
   morgan.token("id", function getId(req) {
     return req.id;
   });
-
-  // Serving build's index.html file for Deploying to Google App Engine is MUST for production
-
-  // From - https://facebook.github.io/create-react-app/docs/deployment
-  // app.use(express.static(path.join(__dirname, "/client/build")));
-
-  // The below two routes are also Perfectly Working with GAE, but I used the 'catchAll' routes below
-  // app.get("/employee", function(req, res) {
-  //   res.status(200).sendFile(path.join(__dirname, "/client/build", "index.html"));
-  // });
-
-  // app.get("/department", function(req, res) {
-  //   res.status(200).sendFile(path.join(__dirname, "/client/build", "index.html"));
-  // });
-
-  // The below IS ALSO WORKING when run < npm run dev > locally - but ofcourse it will not refer to the /client/build folder
-  // app.get("/", function(req, res) {
-  //   res.sendFile(path.join(__dirname, "/client/public", "index.html"));
-  // });
 
   // Morgan - For saving logs to a log file
   let accessLogStream = fs.createWriteStream(__dirname + "/access.log", {
@@ -98,8 +85,6 @@ nextApp.prepare().then(() => {
   );
   
 
-  app.use("/api/department", departmentRoutes);
-  app.use("/api/employee", employeeRoutes);
   app.use("/api/playlist", playlistRoutes);
 
   app.get("/login-with-spotify", spotifyLogInRoute);
