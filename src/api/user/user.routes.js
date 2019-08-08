@@ -1,18 +1,17 @@
+const express = require('express');
+const router = express.Router();
+const Auth = require('../../middleware/Auth');
+// const User = require('./user.controller');
+const User = {};
 
-"use strict";
 
-var Auth = require('../../middleware/Auth'),
-    Playlist = require('./Playlist.controller'),
-    express = require("express"),
-    router = express.Router();
-    
 // add a new playlist
-router.post('/', Auth.isAdmin, Playlist.createPlaylist);
-// get a list of playlist 
-router.get('/', Auth.isSuperAdmin, Playlist.getPlaylist);
+router.post('/', Auth.isSuperAdmin, User.CreateUser);
+// get a list of playlist
+router.get('/', Auth.isSuperAdmin, User.getAllUsers);
 // update one playlist by the slug
-router.put('/update/:slug', Playlist.updatePlaylist);
+router.put('/update/:id', Auth.isSuperAdmin, User.updateUser);
 // delete one playlist by the slug
-router.delete('/remove/:slug', Playlist.removePlaylist);
+router.delete('/remove/:id', Auth.isSuperAdmin, User.removeUser);
 
 module.exports = router;

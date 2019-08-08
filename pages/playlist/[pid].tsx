@@ -1,8 +1,12 @@
 import React from 'react';
+import { MyNextPage } from '../../next-env';
 import PlaylistLP from '../../src/components/Templates/PlaylistLP';
 
+interface indexProps {
+  data:any
+}
 
-const index = ({ data }) => {
+const index:MyNextPage = ({ data }:indexProps) => {
   return (
     <main>
       <PlaylistLP playlist={data} />
@@ -29,5 +33,6 @@ index.getInitialProps = async ({ query, req }) => {
     return { pid, data };
 
 }
+
 export const config = { amp: 'hybrid' };
 export default index

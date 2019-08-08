@@ -1,23 +1,18 @@
-"use strict";
+const mongoosePaginate = require('mongoose-paginate');
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
-const mongoose = require("mongoose"),
-      Schema = mongoose.Schema,
-      mongoosePaginate = require("mongoose-paginate");
-
-let PlaylistSchema = new Schema(
-  {
-    playlist_slug: { type: String, unique: true },
-    spotify_uri:  { type: String },
-    playlist_name: { type: String },
-    playlist_author: { type: String },
-    background_image_url:  { type: String },
-    playlist_image_url:  { type: String },
-  },
-  {
-    // createdAt,updatedAt fields are automatically added into records
-    timestamps: true
-  }
-);
+const PlaylistSchema = new Schema({
+  playlist_slug: { type: String, unique: true },
+  spotify_uri: { type: String },
+  playlist_name: { type: String },
+  playlist_author: { type: String },
+  background_image_url: { type: String },
+  playlist_image_url: { type: String },
+}, {
+  // createdAt,updatedAt fields are automatically added into records
+  timestamps: true,
+});
 
 // plugins
 PlaylistSchema.plugin(mongoosePaginate);

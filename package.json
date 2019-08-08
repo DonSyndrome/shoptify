@@ -12,6 +12,7 @@
         "build": "next build",
         "dev": "nodemon index.js",
         "test": "echo no test ",
+        "lint": "eslint src/",
         "fix-code": "prettier-eslint --write 'src/**/*.{js,jsx}' ",
         "fix-styles": "prettier-stylelint --write 'src/**/*.{css,scss}' "
     },
@@ -27,11 +28,6 @@
         "cookie-parser": "^1.4.4",
         "cookie-session": "^2.0.0-beta.3",
         "dotenv": "^6.2.0",
-        "eslint": "5.12.0",
-        "eslint-config-airbnb": "^17.1.0",
-        "eslint-plugin-import": "^2.16.0",
-        "eslint-plugin-jsx-a11y": "^6.2.1",
-        "eslint-plugin-react": "^7.12.4",
         "express": "^4.16.4",
         "express-request-id": "^1.4.1",
         "express-session": "^1.16.2",
@@ -58,6 +54,11 @@
         "yup": "^0.27.0"
     },
     "devDependencies": {
-        "@types/react": "^16.8.23"
+        "@types/react": "^16.8.23",
+        "eslint": "^5.16.0",
+        "eslint-config-airbnb": "^17.1.1",
+        "eslint-plugin-import": "^2.18.2",
+        "eslint-plugin-jsx-a11y": "^6.2.3",
+        "eslint-plugin-react": "^7.14.3"
     }
 }

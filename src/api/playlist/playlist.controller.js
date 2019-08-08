@@ -1,81 +1,79 @@
-var Playlist = require('./playlist.dal'),
-    playlistYup = require('./playlist.yup');
+const Playlist = require('./playlist.dal');
+const playlistYup = require('./playlist.yup').default;
 
-exports.createPlaylist = function (req, res, next) {
-    var Playlist = req.body;
-    // validate with formik also
-    try {
-        playlistYup.validate(Playlist);
-    } catch (err) {
-        console.log(err);
-        res.status(400).send(err);
+exports.createPlaylist = function createPlaylist(req, res, next) {
+  const newPlaylist = req.body;
+  // validate with formik also
+  try {
+    playlistYup.validate(newPlaylist);
+  } catch (err) {
+    console.log(err);
+    res.status(400).send(err);
+  }
+  Playlist.create(newPlaylist, (err, Success) => {
+    if (err) {
+      res.json({
+        error: err,
+      });
     }
-    Playlist.create(Playlist, function(err, Playlist) {
-        if(err) {
-            res.json({
-                error : err
-            })
-        }
-        res.json({
-            message : "Playlist created successfully",
-            Playlist,
-        })
-    })
-}
+    res.json({
+      message: 'Playlist created successfully',
+      Success,
+    });
+  });
+};
 
-exports.getPlaylist = function(req, res, next) {
-    Playlist.get({}, function(err, Playlist) {
-        if(err) {
-            res.json({
-                error: err
-            })
-        }
-        res.json({
-            Playlist: Playlist
-        })
-    })
-}
-
-exports.getPlaylistBySlug = function(req, res, next) {
-    Playlist.getBySlug(req.params.slug, function(err, Playlist) {
-        if(err) {
-            res.json({
-                error: err
-            })
-        }
-        res.json({
-            Playlist: Playlist
-        })
-    })
-}
-
-exports.updatePlaylist = function(req, res, next) {
-    var Playlist = {
-        name: req.body.name,
-        description: req.body.description
+exports.getPlaylist = function getPlaylist(req, res, next) {
+  Playlist.get({}, (err, Success) => {
+    if (err) {
+      res.json({
+        error: err,
+      });
     }
-    Playlist.update({_id: req.params.slug}, Playlist, function(err, Playlist) {
-        if(err) {
-            res.json({
-                error : err
-            })
-        }
-        res.json({
-            message : "Playlist updated successfully",
-            Playlist,
-        })
-    })
-}
+    res.json({
+      Success,
+    });
+  });
+};
 
-exports.removePlaylist = function(req, res, next) {
-    Playlist.delete({_id: req.params.slug}, function(err, Playlist) {
-        if(err) {
-            res.json({
-                error : err
-            })
-        }
-        res.json({
-            message : "Playlist deleted successfully"
-        })
-    })
-}
+exports.getPlaylistBySlug = function getPlaylistBySlug(req, res, next) {
+  Playlist.getBySlug(req.params.slug, (err, Success) => {
+    if (err) {
+      res.json({
+        error: err,
+      });
+    }
+    res.json({
+      Success,
+    });
+  });
+};
+
+exports.updatePlaylist = function updatePlaylist(req, res, next) {
+  const UpdatedPlaylist = req.body;
+  Playlist.update({ _id: req.params.slug }, UpdatedPlaylist, (err, Success) => {
+    if (err) {
+      res.json({
+        error: err,
+      });
+    }
+    res.json({
+      message: 'Playlist updated successfully',
+      Success,
+    });
+  });
+};
+
+exports.removePlaylist = function removePlaylist(req, res, next) {
+  Playlist.delete({ _id: req.params.slug }, (err, Success) => {
+    if (err) {
+      res.json({
+        error: err,
+      });
+    }
+    res.json({
+      message: 'Playlist deleted successfully',
+      Success,
+    });
+  });
+};
