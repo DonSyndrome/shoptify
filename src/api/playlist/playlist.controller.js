@@ -37,7 +37,7 @@ exports.getPlaylist = function(req, res, next) {
 }
 
 exports.getPlaylistBySlug = function(req, res, next) {
-    Playlist.getBySlug({playlist_slug: req.params.slug}, function(err, Playlist) {
+    Playlist.getBySlug(req.params.slug, function(err, Playlist) {
         if(err) {
             res.json({
                 error: err
@@ -61,7 +61,8 @@ exports.updatePlaylist = function(req, res, next) {
             })
         }
         res.json({
-            message : "Playlist updated successfully"
+            message : "Playlist updated successfully",
+            Playlist,
         })
     })
 }

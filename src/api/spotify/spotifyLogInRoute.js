@@ -1,8 +1,8 @@
 "use strict";
 
 let querystring = require('querystring'),
-    constants = require('../../constants'),
-    generateRandomString = require('../utils/generateRandomString');
+    constants = require('../../../constants'),
+    generateRandomString = require('../../utils/generateRandomString');
 
 // To Add New Playlist
 const spotifyLogInRoute = function(req, res) {

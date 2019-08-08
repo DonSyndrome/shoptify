@@ -4,7 +4,7 @@ import Hero from "../src/components/Organisms/Hero";
 import style from '../src/styles/index';
 
 
-const Home = () => (
+const Home = ({spotify_id}) => (
   
   <Fragment>
     <Head title="Tunelist homepage" />
@@ -12,7 +12,7 @@ const Home = () => (
 
     <div className="villen">
       <div>
-        
+        welcome : {spotify_id}
       </div>
     </div>
     <style jsx>{`
@@ -28,5 +28,10 @@ const Home = () => (
   </Fragment>
 
 )
+Home.getInitialProps = ({ req }) => {
+  console.log(req.session);
+  const { spotify_id } = req.session;
+  return { spotify_id };
+}
 
 export default Home

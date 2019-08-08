@@ -1,5 +1,7 @@
 "use strict";
 const mongoose = require("mongoose");
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 module.exports = {
   database: process.env.MONGO_DB,
@@ -15,6 +17,18 @@ module.exports = {
   connectDB: function(app) {
     const mongoDb = mongoose.connect(this.database, this.options);
       //  add the mongodb and the mod
+      app.use(session({
+        name:'qid',
+        secret: 'keyboard cat',
+        resave: false,
+        saveUninitialized: false,
+        store: new MongoStore({ mongooseConnection: mongoose.connection }),
+        cookie: { 
+          // secure: true,
+          httpOnly: true,
+          maxAge: 1000 * 60 * 60 * 24 // day
+         }
+      }))
       app.use((req, res, next) => {
         req.mongodb = mongoDb;
         // Logging req.mysqldb/req.mongodb at this point gives the correct result.

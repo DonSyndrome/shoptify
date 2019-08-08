@@ -9,9 +9,7 @@ var Auth = require('../../middleware/Auth'),
 // add a new playlist
 router.post('/', Auth.isAdmin, Playlist.createPlaylist);
 // get a list of playlist 
-router.get('/', Auth.isAuthenticated, Playlist.getPlaylist);
-// get a one playlist by the slug 
-router.get('/:slug', Auth.isAuthenticated, Playlist.getPlaylistBySlug);
+router.get('/', Auth.isSuperAdmin, Playlist.getPlaylist);
 // update one playlist by the slug
 router.put('/update/:slug', Playlist.updatePlaylist);
 // delete one playlist by the slug

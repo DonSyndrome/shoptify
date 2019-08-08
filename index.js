@@ -11,8 +11,11 @@ const addRequestId = require("express-request-id")();
 const cookieParser = require('cookie-parser');
 
 
-const spotifyLogInRoute = require("./src/routes/spotifyLogInRoute");
-const spotifyCallbackRoute = require("./src/routes/spotifyCallbackRoute");
+
+
+const spotifyLogInRoute = require("./src/api/spotify/spotifyLogInRoute");
+const spotifyCallbackRoute = require("./src/api/spotify/spotifyCallbackRoute");
+const SpotifyRefreshToken = require("./src/api/spotify/SpotifyRefreshToken");
 
 // new Data Routes 
 const playlistRoutes = require("./src/api/playlist/playlist.routes");
@@ -41,11 +44,13 @@ nextApp.prepare().then(() => {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(cookieParser());
-  app.use((req, res, next) => {
-      console.log(Object.keys(req));
-      console.log(req.secret);
-    next()
-  });
+
+
+  // app.use((req, res, next) => {
+  //     // console.log(Object.keys(req));
+  //     // console.log(req.session);
+  //   next()
+  // });
 
 
   morgan.token("id", function getId(req) {
@@ -88,6 +93,7 @@ nextApp.prepare().then(() => {
   app.use("/api/playlist", playlistRoutes);
 
   app.get("/login-with-spotify", spotifyLogInRoute);
+  app.get("/refresh-spotify-token", SpotifyRefreshToken);
   app.get("/spotify-callback", spotifyCallbackRoute);
 
 

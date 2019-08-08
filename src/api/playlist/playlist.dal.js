@@ -5,16 +5,16 @@ const mongoose = require('mongoose'),
 
 PlaylistSchema.statics = {
   create : function(data, cb) {
-      var hero = new this(data);
-      hero.save(cb);
+      var playlist = new this(data);
+      playlist.save(cb);
   },
 
   get: function(query, cb) {
       this.find(query, cb);
   },
 
-  getBySlug: function(query, cb) {
-      this.findOne(query, cb);
+  getBySlug: function(playlist_slug, cb) {
+      this.findOne({playlist_slug,}, cb);
   },
 
   update: function(query, updateData, cb) {
