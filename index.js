@@ -15,6 +15,8 @@ const spotifyCallbackRoute = require('./src/api/spotify/spotifyCallbackRoute');
 const SpotifyRefreshToken = require('./src/api/spotify/SpotifyRefreshToken');
 // new Data Routes
 const playlistRoutes = require('./src/api/playlist/playlist.routes');
+// midelwares
+const Auth = require('./src/middleware/Auth');
 
 
 const dev = process.env.NODE_ENV !== 'production';
@@ -79,10 +81,11 @@ nextApp.prepare().then(() => {
   app.use('/api/playlist', playlistRoutes);
 
   app.get('/login-with-spotify', spotifyLogInRoute);
-  app.get('/refresh-spotify-token', SpotifyRefreshToken);
+  app.get('/refresh-spotify-token', Auth.isAuthenticated, SpotifyRefreshToken);
   app.get('/spotify-callback', spotifyCallbackRoute);
 
-
+  // defence the admin routes in the middleware level
+  app.use('/admin/', Auth.isAuthenticated);
   // Only now, AFTER the above /api/ routes, the next hendler function
   app.get('*', nextHandler);
 

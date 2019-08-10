@@ -4,6 +4,7 @@ const clientId = constants.SPOTIFY_CLIENT_ID;
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET; // Your secret
 
 const SpotifyRefreshToken = (req, res) => {
+  console.log(req.session);
   const authOptions = {
     url: 'https://accounts.spotify.com/api/token',
     headers: { Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString('base64')}` },
