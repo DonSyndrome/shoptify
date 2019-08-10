@@ -16,7 +16,9 @@ const Home = () => (
         z-index: 2;
         position: relative;
       }
+
     `}</style>
+    
   </Fragment>
 )
 

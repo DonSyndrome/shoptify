@@ -13,7 +13,7 @@ export enum Layout {
   'fill', 'fixed', 'fixed-height', 'flex-item', 'intrinsic', 'nodisplay', 'responsive'
 }
 
-const Image = ({ alt, src,width,height,layout}:Props )=> {
+const Image: React.FunctionComponent<Props> = ({ alt, src,width,height,layout}) => {
   const isAmp = useAmp()
     return (
         <div>
