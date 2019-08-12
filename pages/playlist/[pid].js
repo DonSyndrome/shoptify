@@ -1,12 +1,8 @@
 import React from 'react';
-import { MyNextPage } from '../../next-env';
 import PlaylistLP from '../../src/components/Templates/PlaylistLP';
+//https://images.unsplash.com/photo-1496737018672-b1a6be2e949c
 
-interface indexProps {
-  data:any
-}
-
-const index:MyNextPage = ({ data }:indexProps) => {
+const index = ({ pid, data }) => {
   return (
     <main>
       <PlaylistLP playlist={data} />
@@ -14,13 +10,16 @@ const index:MyNextPage = ({ data }:indexProps) => {
   )
 }
 index.getInitialProps = async ({ query, req }) => {
-    const { pid } = query
+  if (req) {
     var mongoose = await req.mongodb;
     const Playlist = await mongoose.models.Playlist;
+    const { pid } = query
     const data = await Playlist.findOne(
       {
         "playlist_slug": pid,
       },
+      null,
+      {},
       (err, docs) => {
         if (err) {
           console.log(err)
@@ -30,9 +29,11 @@ index.getInitialProps = async ({ query, req }) => {
         }
       }
     );
+
     return { pid, data };
-
+  } else {
+    return {};
+  }
 }
-
 export const config = { amp: 'hybrid' };
 export default index

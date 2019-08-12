@@ -28,17 +28,6 @@ const Label = ({ error, children, ...props }) => {
     </label>
   );
 };
-type Props = {
-  type: string,
-  id: any,
-  label: string,
-  error: any,
-  value: any,
-  onChange: any,
-  className?: any,
-  placeholder:string,
-  onBlur?:()=>void,
-}
 
 const TextInput = ({
   type,
@@ -49,7 +38,7 @@ const TextInput = ({
   onChange,
   className,
   ...props
-}:Props) => {
+}) => {
   return (
     <div className="input-group">
       <Label htmlFor={id} error={error}>
