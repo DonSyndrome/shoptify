@@ -6,8 +6,6 @@ import { Playlist } from '../../models/Playlist.model';
 type Props = {
   data:Playlist[]
 }
-
-
 const PlaylistsTable = ({data}:Props) => {
   return (
       <div className="layout">
