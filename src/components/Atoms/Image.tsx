@@ -1,49 +1,59 @@
 import React from 'react'
-import styles from '../../styles'
 import { useAmp } from 'next/amp'
+import styles from '../../styles'
 
 type Props = {
-  alt:string, 
-  src:string,
-  width?:number | string ,
-  height?:number | string,
-  layout?:Layout,
+  alt: string,
+  src: string,
+  width?: number | string,
+  height?: number | string,
+  layout?: Layout,
+  maxWidth?: number ,
+
 }
 export enum Layout {
-  'fill', 'fixed', 'fixed-height', 'flex-item', 'intrinsic', 'nodisplay', 'responsive'
+  fill = 'fill', fixed = 'fixed', fixedHeight = 'fixed-height', flexItem = 'flex-item', intrinsic = 'intrinsic', nodisplay = 'nodisplay', responsive = 'responsive'
 }
 
-const Image: React.FunctionComponent<Props> = ({ alt, src,width,height,layout}) => {
+const Image = ({ alt, src, width, height, layout,maxWidth }: Props) => {
   const isAmp = useAmp()
-    return (
+  return (
+    <div className='img-container'>
+      {isAmp ?
+        // culd not TypedIt to the JSX HTML type system so this is what there is sry
+        // @ts-ignore: there is amp image. 
+        <amp-img
+          alt={alt}
+          src={src}
+          width={width}
+          height={height}
+          layout={layout}
+        /> :
         <div>
-        {isAmp ?
-            <amp-img 
-              alt={alt}
-              src={src}
-              width={width}
-              height={height}
-              layout={layout}
-            /> :
-            <div>
-              <img 
-                alt={alt}
-                src={src}
-                width={width}
-                height={height}
-              />
-            </div>
-            
-          }
-<style jsx>{`
-img {
-  width: 100%;
-  max-width:450px;
-  height: auto;
-}
+          <img
+            alt={alt}
+            src={src}
+            width={width}
+            height={height}
+          />
+        </div>
+
+      }
+      <style jsx>{`
+        
+        ${!maxWidth ? '' : `.img-container{
+          max-width: ${maxWidth}px;
+          margin: auto;
+        }`}
+        img {
+          width: 100%;
+          max-width:450px;
+          height: auto;
+          ${styles.mixins["box-shadow-sm"]}
+        }
 
 `}</style>
-        </div>
-    )
+    </div>
+  )
 }
 export default Image

@@ -28,6 +28,18 @@ const Label = ({ error, children, ...props }) => {
     </label>
   );
 };
+type Props = {
+  type: string,
+  id: any,
+  label: string,
+  error: any,
+  value: any,
+  onChange: any,
+  className?: any,
+  disable?: boolean,
+  placeholder:string,
+  onBlur?:()=>void,
+}
 
 const TextInput = ({
   type,
@@ -37,8 +49,9 @@ const TextInput = ({
   value,
   onChange,
   className,
+  disable,
   ...props
-}) => {
+}:Props) => {
   return (
     <div className="input-group">
       <Label htmlFor={id} error={error}>
@@ -50,6 +63,7 @@ const TextInput = ({
         type={type}
         value={value}
         onChange={onChange}
+        disabled={disable}
         {...props}
       />
       <InputFeedback error={error} />
