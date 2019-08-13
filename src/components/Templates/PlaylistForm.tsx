@@ -188,7 +188,7 @@ const MyForm = (props) => {
           <TextInput
             id="playlist_slug"
             type="text"
-            label={`playlist slug ${values.playlist_slug && `(short url:${getSiteURL()}/playlist/${values.playlist_slug})`}`}
+            label={`playlist slug ${values.playlist_slug && `(short url:${getSiteURL()}/playlist/${encodeURI(values.playlist_slug)})`}`}
             placeholder="short n` chatchy"
             error={touched.playlist_slug && errors.playlist_slug}
             value={values.playlist_slug}
