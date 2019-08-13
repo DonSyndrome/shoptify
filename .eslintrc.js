@@ -9,6 +9,10 @@ module.exports = {
         "no-unused-vars": ["error", { "args": "none","argsIgnorePattern": "^_" }],
         "import/newline-after-import": "off",
         "no-console": "off",
-        "camelcase": ["error",{ "properties": "never" }]
+        "camelcase": ["error",{ "properties": "never" }],
+        "react/destructuring-assignment": ["never"]
+    },
+    globals: {
+      "fetch": false
     }
 };

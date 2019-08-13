@@ -13,7 +13,7 @@ const index:MyNextPage = ({ data }:indexProps) => {
     </main>
   )
 }
-index.getInitialProps = async ({ query, req }) => {
+index.getInitialProps = async ({ query, req, res }) => {
     const { pid } = query
     var mongoose = await req.mongodb;
     const Playlist = await mongoose.models.Playlist;
@@ -30,7 +30,11 @@ index.getInitialProps = async ({ query, req }) => {
         }
       }
     );
-    return { pid, data };
+    if (!data) {
+      res.redirect('/404');
+    } else {
+      return { pid, data };
+    }
 
 }
 

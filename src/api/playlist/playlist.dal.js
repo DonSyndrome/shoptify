@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const PlaylistSchema = require('./playlist.model');
 
 PlaylistSchema.statics = {
-  create(data, cb) {
+  create(data) {
     const playlist = new this(data);
-    playlist.save(cb);
+    return playlist.save();
   },
 
   get(query, cb) {

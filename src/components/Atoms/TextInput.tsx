@@ -36,6 +36,7 @@ type Props = {
   value: any,
   onChange: any,
   className?: any,
+  disable?: boolean,
   placeholder:string,
   onBlur?:()=>void,
 }
@@ -48,6 +49,7 @@ const TextInput = ({
   value,
   onChange,
   className,
+  disable,
   ...props
 }:Props) => {
   return (
@@ -61,6 +63,7 @@ const TextInput = ({
         type={type}
         value={value}
         onChange={onChange}
+        disabled={disable}
         {...props}
       />
       <InputFeedback error={error} />

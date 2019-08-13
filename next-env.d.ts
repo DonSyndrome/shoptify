@@ -2,6 +2,7 @@
 /// <reference types="next" />
 /// <reference types="react" />
 /// <reference types="next/types/global" />
+/// <reference path='mongoose.d.ts' />
 
 import {
 	NextPageContext,
@@ -34,15 +35,20 @@ export class MyIncomingMessage extends IncomingMessage {
 	mongodb: any;
 }
 
-declare global {
-	namespace JSX {
-		interface IntrinsicElements {
-			[elemName: string]: any;
-			'amp-img': any;
-			div: React.DetailedAMPHTMLProps<React.HTMLAttributes<HTMLAmpDivElement>, HTMLAmpDivElement>;
-			// div: DetailedHTMLFactory<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+declare	namespace JSX {
+	interface AmpImg {
+		alt?: string;
+		src?: string;
+		width?: string;
+		height?: string;
+		layout?: string;
+	}
 
-		}
+	interface IntrinsicElements {
+		'amp-img': AmpImg;
+		div: React.DetailedAMPHTMLProps<React.HTMLAttributes<HTMLAmpDivElement>, HTMLAmpDivElement>;
+		// div: DetailedHTMLFactory<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+
 	}
 }
 // DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>

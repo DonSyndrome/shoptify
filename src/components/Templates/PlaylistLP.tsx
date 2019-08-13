@@ -102,6 +102,7 @@ const PlaylistLP = props => {
                   max-width: 1000px;
                 }
                 .texts { 
+                  padding-left:2em;
                   order: 2;
                   text-align: left;
                 }
