@@ -8,14 +8,15 @@ type Props = {
   width?: number | string,
   height?: number | string,
   layout?: Layout,
-  maxWidth?: number ,
+  maxWidth?: number| string,
+  shadow?: boolean,
 
 }
 export enum Layout {
   fill = 'fill', fixed = 'fixed', fixedHeight = 'fixed-height', flexItem = 'flex-item', intrinsic = 'intrinsic', nodisplay = 'nodisplay', responsive = 'responsive'
 }
 
-const Image = ({ alt, src, width, height, layout,maxWidth }: Props) => {
+const Image = ({ alt, src, width, height, layout,maxWidth,shadow }: Props) => {
   const isAmp = useAmp()
   return (
     <div className='img-container'>
@@ -41,15 +42,20 @@ const Image = ({ alt, src, width, height, layout,maxWidth }: Props) => {
       }
       <style jsx>{`
         
-        ${!maxWidth ? '' : `.img-container{
-          max-width: ${maxWidth}px;
-          margin: auto;
-        }`}
-        img {
+          ${!maxWidth 
+          ? '' 
+          : `.img-container{
+                max-width: ${maxWidth}px;
+                margin: auto; 
+            }`
+          }
+       
+        img,amp-img {
           width: 100%;
-          max-width:450px;
           height: auto;
-          ${styles.mixins["box-shadow-sm"]}
+          ${shadow ? 
+          `${styles.mixins["box-shadow-sm"]}`
+          :''}
         }
 
 `}</style>
