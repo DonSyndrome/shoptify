@@ -4,31 +4,30 @@ import CTAButton from "../Atoms/CTAButton";
 import styles from "../../styles/index";
 
 
+type Props = {
+}
 
-
-const Hero = () => (
+const Hero = ({}: Props) => (
   <div className="parallax">
-    <div className="title">
-      <h1>
-        התחל עכשיו
-      </h1>
-      <Link href="./playlist/shay_test">
-        <a>
-          <CTAButton>
-              עקוב
-          </CTAButton> 
-        </a>
-      </Link>
-
-
-    </div>
+        <div className="title">
+          <h1>
+            התחל עכשיו
+        </h1>
+          <Link href="/login-with-spotify" prefetch={false}>
+            <a>
+              <CTAButton>
+                התחבר
+              </CTAButton>
+            </a>
+          </Link>
+        </div>
     <style jsx>{`
 
 
     .parallax {
       ${styles.mixins.heroMinHeight}
       /* The image used */
-      background-image: url('static/home_page_bg.png');
+      background-image: url('/static/home_page_bg.png');
       /* Create the parallax scrolling effect */
       background-attachment: fixed;
       background-position: center;

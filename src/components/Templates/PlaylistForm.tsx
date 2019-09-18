@@ -16,13 +16,12 @@ import { Playlist } from '../../models/Playlist.model';
 
 function fetchPlaylist(spotify_uri) {
   const spotifyGetPlaylistEndpoint = `https://api.spotify.com/v1/playlists/${spotify_uri}?market=IL&fields=images%2C%20name%2C%20owner`;
-  const spotifyAccsesToken = getCockie(SPOTIFY_ACSESS_TOKEN_KEY);
   const options = {
     method: 'GET',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${spotifyAccsesToken}`,
+      Authorization: `Bearer ${getCockie(SPOTIFY_ACSESS_TOKEN_KEY)}`,
     },
   };
   return fetch(spotifyGetPlaylistEndpoint, options)

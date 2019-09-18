@@ -9,5 +9,5 @@ export interface Playlist{
   playlist_image_url: string
   playlist_author: string
   playlist_name: string
-  _id: ObjectId
+  _id?: ObjectId
 }

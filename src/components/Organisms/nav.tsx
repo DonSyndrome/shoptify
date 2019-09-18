@@ -1,16 +1,34 @@
-import React from 'react'
+import React,  {Fragment } from 'react'
+import Link from 'next/link'
 import Head from 'next/head'
 
 
 const Nav = () => (
-  <div className={'nav-bar'}>
-        <Head>
-            <link href={"https://fonts.googleapis.com/css?family=Roboto:100,400,700&display=swap"} rel="stylesheet"/>
-        </Head>
-        <span>
+  <Fragment>
+    <amp-sidebar id="sidebar1" layout="nodisplay" side="right">
+      <ul>
+        <li>Nav item 1</li>
+        <li><a href="#idTwo" on="tap:idTwo.scrollTo">Nav item 2</a></li>
+        <li>Nav item 3</li>
+        <li><a href="#idFour" on="tap:idFour.scrollTo">Nav item 4</a></li>
+        <li>Nav item 5</li>
+        <li>Nav item 6</li>
+      </ul>
+    </amp-sidebar>
+    <div className={'nav-bar'}>
+      <Head>
+        <link href={"https://fonts.googleapis.com/css?family=Roboto:100,400,700&display=swap"} rel="stylesheet" />
+        <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+      </Head>
+      <span>
+        <Link href='/'>
+          <a>
             Tunelist
-        </span>
-        <style jsx>{`
+            </a>
+        </Link>
+        <button on='tap:sidebar1'>Open</button>
+      </span>
+      <style jsx>{`
           .nav-bar {
             text-align: center;
             font-size: 2rem;
@@ -22,6 +40,9 @@ const Nav = () => (
             top:0;
             z-index: 5;
           }
+          a{
+            color: white;
+          }
           :global(html),:global(body) {
             margin:0;
           }
@@ -31,14 +52,13 @@ const Nav = () => (
           }
       `}</style>
     </div>
-
-   
+  </Fragment>
 )
 
 export default Nav
 
 
-// import Link from 'next/link'
+// import Link from 'next/link';
 // const links : {href:string,label:string}[] = [
 //   { href: '/404', label: 'כשרונות צעירים' },
 //   { href: '/404', label: 'מצעד' },
