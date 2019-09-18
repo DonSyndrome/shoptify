@@ -1,7 +1,7 @@
 import React from "react";
-import Link from 'next/link';
-import CTAButton from "../Atoms/CTAButton";
 import styles from "../../styles/index";
+// import Link from 'next/link';
+// import CTAButton from "../Atoms/CTAButton";
 
 
 
@@ -10,15 +10,18 @@ const Hero = () => (
   <div className="parallax">
     <div className="title">
       <h1>
-        התחל עכשיו
+      Coming
       </h1>
-      <Link href="./playlist/shay_test">
+      <h2>
+      soon
+      </h2>
+      {/* <Link href="./playlist/shay_test">
         <a>
           <CTAButton>
               עקוב
           </CTAButton> 
         </a>
-      </Link>
+      </Link> */}
 
 
     </div>
