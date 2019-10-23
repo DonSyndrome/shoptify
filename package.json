@@ -2,7 +2,7 @@
     "name": "server",
     "version": "1.0.0",
     "engines": {
-        "node": "10.15.3"
+        "node": "10"
     },
     "description": "",
     "homepage": "https://mui-table-3.appspot.com/employee",
