@@ -1,5 +1,4 @@
-runtime: nodejs12
-
+runtime: nodejs10
 env: standard
 
 # https://cloud.google.com/appengine/docs/flexible/nodejs/configuring-your-app-with-app-yaml
