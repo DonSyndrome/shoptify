@@ -17,7 +17,6 @@ const SpotifyRefreshToken = require('./src/api/spotify/SpotifyRefreshToken');
 const playlistRoutes = require('./src/api/playlist/playlist.routes');
 // midelwares
 const Auth = require('./src/middleware/Auth');
-const getHttpsRedirectMiddleware = require('./src/middleware/redirectHttpMiddleware');
 
 
 const dev = process.env.NODE_ENV !== 'production';
@@ -29,9 +28,7 @@ const handle = nextApp.getRequestHandler();
 const nextHandler = (req, res) => handle(req, res);
 nextApp.prepare().then(() => {
   const app = express();
-  const httpsPort = app.get('https-port');
-  app.use(getHttpsRedirectMiddleware({ httpsPort }));
-  app.set('trust proxy');
+
   console.log(`connecting to db:${process.env.MONGO_DB}`);
   config.connectDB(app);
 
