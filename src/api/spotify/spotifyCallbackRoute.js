@@ -93,6 +93,11 @@ const spotifyCallback = (req, res) => {
   const redirect = req.cookies ? req.cookies.redirect : null;
   // check that the state is ok
   if (state === null || state !== storedState) {
+    console.log('state_mismatch_just_happend_again!@#%^!#!');
+    console.log('state:');
+    console.log(JSON.stringify(state, null, 2));
+    console.log('storedState:');
+    console.log(JSON.stringify(storedState, null, 2));
     res.redirect(`/#${
       querystring.stringify({
         error: 'state_mismatch',
