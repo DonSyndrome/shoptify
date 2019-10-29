@@ -36,5 +36,5 @@ const Home:MyNextPage = ({ spotifyId }:HomeProps) => (
 //   // const spotifyId  = await '123456';
 //   return { spotifyId };
 // };
-export const config = { amp: 'true' };
+export const config = { amp: true };
 export default Home;
