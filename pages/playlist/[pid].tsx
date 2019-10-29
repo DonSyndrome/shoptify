@@ -38,5 +38,5 @@ index.getInitialProps = async ({ query, req, res }) => {
 
 }
 
-export const config = { amp: 'hybrid' };
+export const config = { amp: 'true' };
 export default index
