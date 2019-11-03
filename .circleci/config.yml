@@ -44,6 +44,8 @@ jobs:
       - run: echo SPOTIFY_CLIENT_SECRET=$SPOTIFY_CLIENT_SECRET >> .env
       # add the Spotify client secret to the env file (watch the >> insted of >)
       - run: echo SITE_URL=$SITE_URL >> .env
+      # add the DOMAIN to the env file (watch the >> insted of >)
+      - run: echo DOMAIN=$DOMAIN >> .env
 
       # build next server!
       - run:  yarn build 
