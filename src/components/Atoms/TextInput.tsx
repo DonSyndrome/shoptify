@@ -1,33 +1,7 @@
 import React from "react";
+import InputFeedback from "./InputFeedback"
+import Label from "./Label"
 
-const InputFeedback = ({ error }) =>
-  error ? (
-    <div className="input-feedback">
-      {error}
-      <style jsx>{`
-      .input-feedback {
-        color: #999;
-        margin-top: .25rem;
-        color: red;
-      }
-      `}</style>
-    </div>
-  ) : null;
-
-const Label = ({ error, children, ...props }) => {
-  return (
-    <label className="label" {...props}>
-      {children}
-      <style jsx>{`
-        .label{
-          font-weight: bold;
-          display: block;
-          margin-bottom: .5rem;
-        }
-        `}</style>
-    </label>
-  );
-};
 type Props = {
   type: string,
   id: any,
