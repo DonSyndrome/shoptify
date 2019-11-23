@@ -8,6 +8,7 @@ import getSiteURL from '../../utils/getSiteURL';
 import { SPOTIFY_ACSESS_TOKEN_KEY } from '../../../constants';
 import styles from '../../styles/index';
 import TextInput from '../Atoms/TextInput';
+import MediaUpload from '../Atoms/MediaUpload';
 import playlistYup from '../../api/playlist/playlist.yup';
 import { Playlist } from '../../models/Playlist.model';
 
@@ -29,7 +30,7 @@ function fetchPlaylist(spotify_uri) {
 }
 
 type Props = {
-  playlist?:Playlist
+  playlist?: Playlist
   edit: boolean
 }
 
@@ -103,7 +104,7 @@ const formikEnhancer = withFormik({
         Router.push(`/playlist/${payload.playlist_slug}`);
 
         return response;
-      }).catch(err =>{
+      }).catch(err => {
         alert(`problem With Server${JSON.stringify(err)}`);
         setSubmitting(false);
       })
@@ -136,21 +137,22 @@ const MyForm = (props) => {
       // TODO: THINK OF WAY TO GENNERATE
       SpotifyFetch(fetchPlaylist, values.spotify_uri)
         .then((myJson: any) => {
-          console.log(myJson);
           if (myJson && !myJson.error) {
-            const playlist_image_url = myJson.images[0].url;
-            const playlist_author = myJson.owner.display_name;
-            const playlist_name = myJson.name;
-            setFieldValue('playlist_image_url', playlist_image_url);
-            setFieldValue('playlist_author', playlist_author);
-            setFieldValue('playlist_name', playlist_name);
+          const playlist_image_url = myJson.images[0].url;
+          const playlist_author = myJson.owner.display_name;
+          const playlist_name = myJson.name;
+          setFieldValue('playlist_image_url', playlist_image_url);
+          setFieldValue('playlist_author', playlist_author);
+          setFieldValue('playlist_name', playlist_name);
+          } else {  
+            throw new Error(myJson.error.message)
           }
         })
-        .catch((reason) => {
-          console.log(reason);
+        .catch((error) => {
+            if (error.message) {
+              alert(error.message);
+            }
         });
-      // handle exception
-      console.log('Refresh Token & Try Again');
     }
   };
   const deletePlaylist = () => {
@@ -159,17 +161,17 @@ const MyForm = (props) => {
       method: 'DELETE',
     };
     fetch(url, options)
-    .then(response => response.json())
-    .then((myJson: any) => {
-      if (myJson && !myJson.error) {
-        alert(myJson.message);
-        Router.push('/admin/playlist');
-      }
-    })
-    .catch((reason) => {
-      console.log(reason);
-      alert(reason);
-    });
+      .then(response => response.json())
+      .then((myJson: any) => {
+        if (myJson && !myJson.error) {
+          alert(myJson.message);
+          Router.push('/admin/playlist');
+        }
+      })
+      .catch((reason) => {
+        console.log(reason);
+        alert(reason);
+      });
   }
 
   return (
@@ -177,7 +179,7 @@ const MyForm = (props) => {
       <div className="form-container">
         <button
           type='button'
-          onClick={(e)=>Router.push('/admin/playlist')}
+          onClick={(e) => Router.push('/admin/playlist')}
         >
           {'<-'} back
         </button>
@@ -185,6 +187,14 @@ const MyForm = (props) => {
           this is the {values.edit ? 'edit' : 'create'} playlists page :D
         </h1>
         <form onSubmit={handleSubmit}>
+          <MediaUpload
+            id="background_image_url"
+            label="Upload new picture"
+            // placeholder="please enter valid background image url in 16*9"
+            error={touched.background_image_url && errors.background_image_url}
+            value={values.background_image_url}
+            onChange={setFieldValue}
+          />
           <TextInput
             id="playlist_slug"
             type="text"
@@ -197,16 +207,6 @@ const MyForm = (props) => {
             disable={values.edit}
           />
           <TextInput
-            id="background_image_url"
-            type="text"
-            label="Background image URL"
-            placeholder="please enter valid background image url in 16*9"
-            error={touched.background_image_url && errors.background_image_url}
-            value={values.background_image_url}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <TextInput
             id="spotify_uri"
             type="text"
             label="spotify_uri"
@@ -216,6 +216,7 @@ const MyForm = (props) => {
             onChange={handleChange}
             onBlur={handleBlur}
           />
+
           <button type="button" disabled={isSubmitting} onClick={getPreviewFromSpotify}>
             Preview Page
         </button>
@@ -232,7 +233,7 @@ const MyForm = (props) => {
             {values.edit ? 'Update' : 'Submit'}
           </button>
           {
-            values.edit && 
+            values.edit &&
             <button type="button" onClick={deletePlaylist}>
               delete
             </button>

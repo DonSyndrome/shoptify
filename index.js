@@ -8,6 +8,7 @@ const methodOverride = require('method-override');
 const addRequestId = require('express-request-id')();
 const cookieParser = require('cookie-parser');
 const next = require('next');
+const Multer = require('multer');
 const config = require('./src/config/config');
 // spotify Routes
 const spotifyLogInRoute = require('./src/api/spotify/spotifyLogInRoute');
@@ -15,6 +16,7 @@ const spotifyCallbackRoute = require('./src/api/spotify/spotifyCallbackRoute');
 const SpotifyRefreshToken = require('./src/api/spotify/SpotifyRefreshToken');
 // new Data Routes
 const playlistRoutes = require('./src/api/playlist/playlist.routes');
+const uploadRoutes = require('./src/api/upload/uploadRoutes');
 // midelwares
 const Auth = require('./src/middleware/Auth');
 const getHttpsRedirectMiddleware = require('./src/middleware/redirectHttpMiddleware').default;
@@ -33,6 +35,21 @@ nextApp.prepare().then(() => {
   app.set('trust proxy');
   console.log(`connecting to db:${process.env.MONGO_DB}`);
   config.connectDB(app);
+  // By default, the client will authenticate using the service account file
+  // specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use
+  // the project specified by the GOOGLE_CLOUD_PROJECT environment variable. See
+  // https://github.com/GoogleCloudPlatform/google-cloud-node/blob/master/docs/authentication.md
+  // These environment variables are set automatically on Google App Engine
+
+
+  // Multer is required to process file uploads and make them available via
+  // req.files.
+  const multer = Multer({
+    storage: Multer.memoryStorage(),
+    limits: {
+      fileSize: 5 * 1024 * 1024, // no larger than 5mb, you can change as needed.
+    },
+  });
 
   // Generate UUID for request and add it to X-Request-Id header. To work along with morgan logging.
   // Adding a request id to the request object, to facilitate tying different log entries
@@ -79,8 +96,8 @@ nextApp.prepare().then(() => {
     }),
   );
 
-
   app.use('/api/playlist', playlistRoutes);
+  app.use('/api/upload', multer.single('file'), uploadRoutes);
 
   app.get('/login-with-spotify', spotifyLogInRoute);
   app.get('/refresh-spotify-token', Auth.isAuthenticated, SpotifyRefreshToken);
@@ -88,6 +105,8 @@ nextApp.prepare().then(() => {
 
   // defence the admin routes in the middleware level
   app.use('/admin/', Auth.isAuthenticated);
+
+  // Process the file upload and upload to Google Cloud Storage.
   // Only now, AFTER the above /api/ routes, the next hendler function
   app.get('*', nextHandler);
 

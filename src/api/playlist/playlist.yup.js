@@ -7,8 +7,8 @@ const PlaylistYupSchema = Yup.object().shape({
     .max(40, 'hey, 40 is planty')
     .required('First name is required.'),
   background_image_url: Yup.string()
-    .url('Background image url must be a url.')
-    .required('Background mage url is required.'),
+    // .url('Background image url must be a url.')
+    .required('Background image is required.'),
   spotify_uri: Yup.string()
     .required('no magic no mizraHits no tikwa'),
   playlist_image_url: Yup.string()
