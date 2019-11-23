@@ -137,21 +137,21 @@ const MyForm = (props) => {
       // TODO: THINK OF WAY TO GENNERATE
       SpotifyFetch(fetchPlaylist, values.spotify_uri)
         .then((myJson: any) => {
-          console.log(myJson);
           if (myJson && !myJson.error) {
-            const playlist_image_url = myJson.images[0].url;
-            const playlist_author = myJson.owner.display_name;
-            const playlist_name = myJson.name;
-            setFieldValue('playlist_image_url', playlist_image_url);
-            setFieldValue('playlist_author', playlist_author);
-            setFieldValue('playlist_name', playlist_name);
+          const playlist_image_url = myJson.images[0].url;
+          const playlist_author = myJson.owner.display_name;
+          const playlist_name = myJson.name;
+          setFieldValue('playlist_image_url', playlist_image_url);
+          setFieldValue('playlist_author', playlist_author);
+          setFieldValue('playlist_name', playlist_name);
+          } else {  
+            throw new Error(myJson.error.message)
           }
         })
-        .catch((reason) => {
-          if(reason.error && reason.error.message) {
-            alert(reason.error.message);
-          }
-          console.log(reason);
+        .catch((error) => {
+            if (error.message) {
+              alert(error.message);
+            }
         });
     }
   };

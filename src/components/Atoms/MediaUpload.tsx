@@ -80,6 +80,10 @@ export default class MediaUpload extends React.Component<
             {label}
           </Label>
         <div className="flexbox">
+          {this.state.uploading &&
+            <span>
+              uploading...
+            </span>}
           {this.props.value &&
             <a
               role="button"

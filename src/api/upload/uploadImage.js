@@ -7,6 +7,7 @@ const uploadRoute = (req, res, next) => {
     res.status(400).send('No file uploaded.');
     return;
   }
+  console.log(req);
 
   // Instantiate a storage client
   const storage = new Storage();
@@ -19,6 +20,7 @@ const uploadRoute = (req, res, next) => {
   });
 
   blobStream.on('error', (err) => {
+    console.log(err);
     next(err);
   });
 
