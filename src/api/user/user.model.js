@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const mongoosePaginate = require('mongoose-paginate');
-const userSchema = new Schema({
+const UserSchema = new Schema({
   display_name: { type: String }, // The name displayed on the user’s profile.
   email: { type: String },
   spotify_id: { type: Number }, // The Spotify user ID for the user.
@@ -14,6 +14,7 @@ const userSchema = new Schema({
 });
 
 // plugins
-userSchema.plugin(mongoosePaginate);
+UserSchema.plugin(mongoosePaginate);
 
-module.exports = mongoose.model('User', userSchema);
+
+module.exports = UserSchema;

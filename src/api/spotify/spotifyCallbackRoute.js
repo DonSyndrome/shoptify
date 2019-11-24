@@ -1,6 +1,7 @@
 const querystring = require('querystring');
 const request = require('request');
 const constants = require('../../../constants');
+const getOrCreateUser = require('../user/user.controller').getOrCreateUser();
 const { SPOTIFY_CLIENT_ID, SPOTIFY_REDIRECT_URI } = constants;
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET; // Your secret
 
@@ -40,6 +41,11 @@ function PromisGetCurentUser({ access_token: accessToken }) {
       }
       try {
         // JSON.parse() can throw an exception if not valid JSON
+        console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
+        console.log('user_object_from_spotify');
+        console.log(body);
+        await getOrCreateUser(body);
+
         return resolve(body);
         // return user
       } catch (e) {
@@ -101,41 +107,42 @@ const spotifyCallback = (req, res) => {
   // state is valid, continue
   res.clearCookie(constants.SPOTIFY_STATE_KEY);
 
-  PromisGetToken({ code }).then((body) => {
-    const { access_token: accessToken, refresh_token: refreshToken } = body;
-    console.log(body);
-    // store the tokens we get from spotify fot the user
-    req.session.userAccessToken = accessToken;
-    req.session.refreshToken = refreshToken;
-    // we also pass the token to the browser to make requests from there
-    res.cookie(constants.SPOTIFY_ACSESS_TOKEN_KEY, refreshToken);
+  PromisGetToken({ code })
+    .then((body) => {
+      const { access_token: accessToken, refresh_token: refreshToken } = body;
+      console.log(body);
+      // store the tokens we get from spotify fot the user
+      req.session.userAccessToken = accessToken;
+      req.session.refreshToken = refreshToken;
+      // we also pass the token to the browser to make requests from there
+      res.cookie(constants.SPOTIFY_ACSESS_TOKEN_KEY, refreshToken);
 
 
-    if (playlistToFolow) {
-      playlistToFolow.forEach((playlist) => {
-        followPlaylist({
-          playlistID: playlist,
-          // eslint-disable-next-line camelcase
-          access_token: accessToken,
+      if (playlistToFolow) {
+        playlistToFolow.forEach((playlist) => {
+          followPlaylist({
+            playlistID: playlist,
+            // eslint-disable-next-line camelcase
+            access_token: accessToken,
+          });
         });
-      });
-    }
-    PromisGetCurentUser({ access_token: accessToken })
-      .then((val) => {
-        // store the id we get from spotify for the user
-        const currentUserId = val.id;
-        req.session.spotifyId = currentUserId;
-        // then we redirect the loged in user to do what we want
-        if (redirect) {
-          res.clearCookie('redirect');
-          res.redirect(redirect);
-        } else {
-          res.redirect('/');
-        }
-      });
-  }).catch((err) => {
-    console.log(err);
-  });
+      }
+      PromisGetCurentUser({ access_token: accessToken })
+        .then((user) => {
+          // store the id we get from spotify for the user
+          const currentUserId = user.id;
+          req.session.spotifyId = currentUserId;
+          // then we redirect the loged in user to do what we want
+          if (redirect) {
+            res.clearCookie('redirect');
+            res.redirect(redirect);
+          } else {
+            res.redirect('/');
+          }
+        });
+    }).catch((err) => {
+      console.log(err);
+    });
 };
 
 module.exports = spotifyCallback;
