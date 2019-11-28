@@ -7,4 +7,5 @@ const PlaylistYupSchema = Yup.object().shape({
   spotify_id: Yup.number(), // The Spotify user ID for the user.
   role: Yup.string(), //
 });
+
 module.exports = PlaylistYupSchema;
