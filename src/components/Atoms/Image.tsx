@@ -8,7 +8,7 @@ type Props = {
   width?: number | string,
   height?: number | string,
   layout?: Layout,
-  maxWidth?: number ,
+  maxWidth?: number | string,
 
 }
 export enum Layout {
