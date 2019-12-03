@@ -3,7 +3,6 @@ const constants = require('../../../constants');
 const generateRandomString = require('../../utils/generateRandomString');
 // To Add New Playlist
 const spotifyLogInRoute = (req, res) => {
-  console.log('makeShure the login-with-spotify route work');
   const state = generateRandomString(16);
   const cokiesOptions = { expires: new Date(Date.now() + 5000) };
   if (process.env.DOMAIN !== 'localhost') {
@@ -15,16 +14,28 @@ const spotifyLogInRoute = (req, res) => {
   const { query } = res.req;
   if (query) {
     if (query['folow-playlist']) {
-      // parse becose the folow playlist is an array eg:
-      // example.com?folow-playlist=['firstPlaylistId','secontPlaylistId']
-      const playlistsToFolow = JSON.parse(query['folow-playlist']);
+      // example.com?folow-playlist='firstPlaylistId','secontPlaylistId'
+      const playlistsToFolow = query['folow-playlist'].split(',');
       res.cookie(constants.PLAYLISTS_TO_FOLOW, playlistsToFolow, cokiesOptions);
-      scope += 'playlist-modify-private playlist-modify-public';
+      scope += 'playlist-modify-private playlist-modify-public ';
+    }
+    if (query['folow-artist']) {
+      // example.com?folow-artist=artist_id,2nd_artist_id
+      const artistToFolow = query['folow-artist'].split(',');
+      res.cookie(constants.ARTIST_TO_FOLOW, artistToFolow, cokiesOptions);
+      scope += 'user-follow-modify ';
+    }
+    if (query['folow-song']) {
+      // example.com?folow-song=song_id,2nd_song_id
+      const songsToFolow = query['folow-song'].split(',');
+      res.cookie(constants.SONGS_TO_FOLOW, songsToFolow, cokiesOptions);
+      scope += 'user-library-modify ';
     }
     if (query.redirect) {
       const redirectURL = query.redirect;
       res.cookie('redirect', redirectURL, cokiesOptions);
     }
+    scope.trim();
   }
   // your application requests authorization
   res.redirect(`https://accounts.spotify.com/authorize?${querystring.stringify({

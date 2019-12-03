@@ -2,27 +2,26 @@ import React from "react";
 import styles from '../../styles/index';
 import CTAButton from '../Atoms/CTAButton';
 import Image, { Layout } from '../Atoms/Image';
+import createLink from '../../utils/createLink';
 
 
-const PlaylistLP = props => {
+const LP = props => {
   const {
-    playlist_image_url,
-    playlist_name,
-    playlist_author,
-    spotify_uri,
+    image_url,
+    name,
+    author,
+    query_params,
     background_image_url
-  } = props.playlist;
-
+  } = props.data;
+  const link = createLink(query_params);
   return (
 
     <div className={'playlist-container'}>
-      {/* altho this classLess div may see uncecery but it is */}
       <div className={'card'}>
-
         <div className={'image-container'}>
           <Image
-            alt={playlist_name}
-            src={playlist_image_url}
+            alt={name}
+            src={image_url}
             width="300"
             height="300"
             layout={Layout.responsive}
@@ -30,12 +29,12 @@ const PlaylistLP = props => {
           />
           <div className={'texts'}>
             <div>
-              <h4>{playlist_name}</h4>
-              <h3>By {playlist_author}</h3>
+              <h4>{name}</h4>
+              <h3>By {author}</h3>
             </div>
           </div>
           <div className="cta-container">
-            <a href={`/login-with-spotify?folow-playlist=${spotify_uri}`}>
+            <a href={link}>
               <CTAButton>
                 Follow
               </CTAButton>
@@ -57,6 +56,7 @@ const PlaylistLP = props => {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
+                color:${styles.colors.SpotifyWhite};
               }
               .card {
                 text-align: center;
@@ -70,7 +70,7 @@ const PlaylistLP = props => {
                 flex-direction:column;
                 justify-content: center;
                 text-shadow: 2px 2px 4px rgba(84,84,84,0.53);
-                margin:10px 0 60px 0;
+                margin:10px 0 10px 0;
               }
               
               .image-container {
@@ -96,29 +96,9 @@ const PlaylistLP = props => {
               a {
                 padding: 0 10px;
               }
-
-              {/* @media (min-width:${styles.breakPoint.desktop}) {
-                .card {
-                  margin: auto;
-                  display:flex;
-                  flex-direction: row;
-                  justify-content: center;
-                  max-width: 1000px;
-                }
-                .texts { 
-                  padding-left:2em;
-                  order: 2;
-                  text-align: left;
-                }
-                .image-container { 
-                  order: 1;
-                  margin: 0;
-                }
-              } */}
-
     `}</style>
     </div>
 
   )
 }
-export default PlaylistLP
+export default LP

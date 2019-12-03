@@ -3,26 +3,9 @@ const request = require('request');
 const constants = require('../../../constants');
 const { SPOTIFY_CLIENT_ID, SPOTIFY_REDIRECT_URI } = constants;
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET; // Your secret
-
-
-function followPlaylist({ playlistID, access_token: accessToken }) {
-  console.log(`requesting A FolowFromSpotify : ${playlistID}`);
-  const options = {
-    url: `https://api.spotify.com/v1/playlists/${playlistID}/followers`,
-    headers: { Authorization: `Bearer ${accessToken}` },
-    json: true,
-    body: {
-      public: false,
-    },
-  };
-  request.put(options, (error, response, body) => {
-    if (!error && response.statusCode === 200) {
-      console.log(`FolowFromSpotify respond without errors: ${playlistID}`);
-    } else {
-      console.log(`FolowFromSpotify respond with errors: ${error}`);
-    }
-  });
-}
+const followPlaylist = require('./utils/followPlayliist');
+const followArtistsORUsers = require('./utils/followArtistsORUsers');
+const saveSong = require('./utils/saveSong');
 
 function PromisGetCurentUser({ access_token: accessToken }) {
   return new Promise(((resolve, reject) => {
@@ -90,6 +73,8 @@ const spotifyCallback = (req, res) => {
   const state = req.query.state || null;
   const storedState = req.cookies ? req.cookies[constants.SPOTIFY_STATE_KEY] : null;
   const playlistToFolow = req.cookies ? req.cookies[constants.PLAYLISTS_TO_FOLOW] : null;
+  const songsToFolow = req.cookies ? req.cookies[constants.SONGS_TO_FOLOW] : null;
+  const artistsToFolow = req.cookies ? req.cookies[constants.ARTIST_TO_FOLOW] : null;
   const redirect = req.cookies ? req.cookies.redirect : null;
   // check that the state is ok
   if (state === null || state !== storedState) {
@@ -115,9 +100,23 @@ const spotifyCallback = (req, res) => {
       playlistToFolow.forEach((playlist) => {
         followPlaylist({
           playlistID: playlist,
-          // eslint-disable-next-line camelcase
           access_token: accessToken,
         });
+      });
+    }
+    if (artistsToFolow) {
+      followArtistsORUsers({
+        artistsToFolow,
+        type: 'artist',
+        access_token: accessToken,
+      });
+    }
+    // https://open.spotify.com/artist/0rj0bYZWazgyJ3hZTDKQHD?si=ZezYQDyNQZat-R8x85pbQA
+    if (songsToFolow) {
+      saveSong({
+        songsToFolow,
+        type: 'artist',
+        access_token: accessToken,
       });
     }
     PromisGetCurentUser({ access_token: accessToken })
