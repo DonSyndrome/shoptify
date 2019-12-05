@@ -4,12 +4,12 @@ const generateRandomString = require('../../utils/generateRandomString');
 // To Add New Playlist
 const spotifyLogInRoute = (req, res) => {
   const state = generateRandomString(16);
-  const cokiesOptions = { expires: new Date(Date.now() + 5000) };
+  const cokiesOptions = { expires: new Date(Date.now() + 300000) };
   if (process.env.DOMAIN !== 'localhost') {
     cokiesOptions.domain = process.env.DOMAIN;
     // cokiesOptions.secure = true;
   }
-  res.cookie(constants.SPOTIFY_STATE_KEY, state, cokiesOptions);// 5 secondsz
+  res.cookie(constants.SPOTIFY_STATE_KEY, state, cokiesOptions);// 5 minuets
   let scope = 'user-read-private user-read-email ';
   const { query } = res.req;
   if (query) {
