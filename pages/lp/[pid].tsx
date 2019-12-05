@@ -22,7 +22,7 @@ index.getInitialProps = async ({ query, req, res }) => {
       "spotify_uri" : "1wzxuc0QsyTuikci0zJYMy",
       "image_url" : "https://i.scdn.co/image/1ade32d0fc88e4288f799d66a7fe24fa9a2d1fe8",
       "author" : "NOROZ" + "," + "בוי אצ'י",
-      "name" : "מרגיש נפלא",
+      "name" : "סיבוב אחרון",
       "query_params" : {
         "folow-playlist":[
           "337CNhCIoEaPIEppMQzVpV",
@@ -39,6 +39,30 @@ index.getInitialProps = async ({ query, req, res }) => {
       }
     };
     return { pid, data:fakeData };
+  } else if (pid ==='lidor') {
+    const lidorData = {
+      "slug" : "lidor",
+      "background_image_url" : "https://storage.googleapis.com/tunelist/Youtube%20Thumb.jpg",
+      "spotify_uri" : "7MloLHoYylMgUYn2XRXHo0",
+      "image_url" : "https://i.scdn.co/image/d8359489888ca1e3927919afc0fdc69590835e2b",
+      "author" : "Lidor",
+      "name" : "סיבוב אחרון",
+      "query_params" : {
+        "folow-playlist":[
+          "337CNhCIoEaPIEppMQzVpV",
+          "5XkPGlUtdgQpGy1AAkYeee",
+          "7HHZEwjZcqeNzOigR2bodl"
+        ],
+        "folow-song":[
+          "7MloLHoYylMgUYn2XRXHo0"
+        ],
+        "folow-artist":[
+          "20ZRifjWvgvprM45GeJffR"
+        ],
+        "redirect":"https://open.spotify.com/track/7MloLHoYylMgUYn2XRXHo0"
+      }
+    };
+    return { pid, data:lidorData };
   } else {
     res.redirect('/404');
   }
