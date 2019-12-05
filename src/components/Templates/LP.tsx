@@ -36,7 +36,7 @@ const LP = props => {
           <div className="cta-container">
             <a href={link}>
               <CTAButton>
-                Follow
+                Listen Now
               </CTAButton>
             </a>
           </div>
