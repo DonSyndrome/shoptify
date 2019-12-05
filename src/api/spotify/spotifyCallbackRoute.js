@@ -124,6 +124,10 @@ const spotifyCallback = (req, res) => {
         // store the id we get from spotify for the user
         const currentUserId = val.id;
         req.session.spotifyId = currentUserId;
+        if (currentUserId === '12177313615') {
+          req.session.admin = true;
+          req.session.superAdmin = true;
+        }
         // then we redirect the loged in user to do what we want
         if (redirect) {
           res.clearCookie('redirect');

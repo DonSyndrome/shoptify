@@ -104,7 +104,7 @@ nextApp.prepare().then(() => {
   app.get('/spotify-callback', spotifyCallbackRoute);
 
   // defence the admin routes in the middleware level
-  app.use('/admin/', Auth.isAuthenticated);
+  app.use('/admin/', Auth.isSuperAdmin);
 
   // Process the file upload and upload to Google Cloud Storage.
   // Only now, AFTER the above /api/ routes, the next hendler function
