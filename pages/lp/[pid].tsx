@@ -39,7 +39,7 @@ index.getInitialProps = async ({ query, req, res }) => {
       }
     };
     return { pid, data:fakeData };
-  } else if (pid ==='lidor') {
+  } else if (pid ==='lidor' || pid ==='LIDOR') {
     const lidorData = {
       "slug" : "lidor",
       "background_image_url" : "https://storage.googleapis.com/tunelist/Youtube%20Thumb.jpg",
